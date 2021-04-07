@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DataController : Singleton<DataController>
+{
+    private const string IS_SOUND = "IS_SOUND";
+
+    private const string IS_MUSIC = "IS_MUSIC";
+
+    private const string INDEX_STAGE = "INDEX_STAGE";
+
+    private const string COIN_REWARD = "COIN_REWARD";
+
+    public bool isSound
+    {
+        get
+        {
+            return bool.Parse(PlayerPrefs.GetString(IS_SOUND, "true"));
+        }
+        set
+        {
+            PlayerPrefs.SetString(IS_SOUND, value.ToString());
+        }
+    }
+    public bool isMusic
+    {
+        get
+        {
+            return bool.Parse(PlayerPrefs.GetString(IS_MUSIC, "true"));
+        }
+        set
+        {
+            PlayerPrefs.SetString(IS_MUSIC, value.ToString());
+        }
+    }
+
+
+    public int indexStage
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(INDEX_STAGE, 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt(INDEX_STAGE, value);
+        }
+    }
+
+    public float coinReward
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(COIN_REWARD, 0);
+        }
+        set
+        {
+            PlayerPrefs.SetFloat(COIN_REWARD, value);
+        }
+    }
+
+}
+
