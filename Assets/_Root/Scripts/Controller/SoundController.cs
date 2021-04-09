@@ -34,6 +34,7 @@ public class SoundController : Singleton<SoundController>
 
         if (DataController.Instance.isMusic && DataController.Instance.isSound)
         {
+            Debug.Log("bat");
             audioSourceBg.Play();
         }
     }

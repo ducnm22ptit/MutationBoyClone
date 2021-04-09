@@ -79,7 +79,7 @@ public class OptionUIController : Singleton<OptionUIController>
             transform.GetChild(1).transform.gameObject.SetActive(true);
         }
 
-        DOTween.Sequence().AppendInterval(4f).AppendCallback(() =>
+        DOTween.Sequence().AppendInterval(2.5f).AppendCallback(() =>
         {
             if (transform.GetChild(2).transform.name == "Result" && transform.name == "Option2")
             {

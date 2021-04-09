@@ -408,6 +408,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundController
       objectReference: {fileID: 0}
+    - target: {fileID: 6500098417924410373, guid: 5f0fc7ac3c3035a4988421aef4aeef64,
+        type: 3}
+      propertyPath: audioSourceBg
+      value: 
+      objectReference: {fileID: 1443456580}
+    - target: {fileID: 6500098417924410373, guid: 5f0fc7ac3c3035a4988421aef4aeef64,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1443456579}
     - target: {fileID: 6500098417924410374, guid: 5f0fc7ac3c3035a4988421aef4aeef64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -548,6 +558,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1443456579 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1644369064045049701, guid: 5f0fc7ac3c3035a4988421aef4aeef64,
+    type: 3}
+  m_PrefabInstance: {fileID: 572174718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1443456580 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6500098417924410375, guid: 5f0fc7ac3c3035a4988421aef4aeef64,
+    type: 3}
+  m_PrefabInstance: {fileID: 572174718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1502901045
 GameObject:
   m_ObjectHideFlags: 0

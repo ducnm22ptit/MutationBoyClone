@@ -12,6 +12,9 @@ public class GameOverPopup : MonoBehaviour
         {
             PopupController.Instance.HidePopup(PopupName.GameoverPopup);
             GameController.Instance.PlayStageCurrent(DataController.Instance.indexStage);
+        }).OnComplete(() =>
+        {
+            GameController.Instance.PlayBackgroundMusicStart();
         });
     }
 

@@ -12,9 +12,7 @@ public class GameController : Singleton<GameController>
     {
         PlayStageCurrent(DataController.Instance.indexStage);
 
-        SoundController.Instance.SetBackgroundMusic(AudioClipName.InGameBackground);
-
-        SoundController.Instance.ContinueBackgroundMusic();
+        PlayBackgroundMusicStart();   
     }
 
     public void PlayStageCurrent(int index)
@@ -33,5 +31,12 @@ public class GameController : Singleton<GameController>
     {
         DataController.Instance.indexStage += 1;
         PlayStageCurrent(DataController.Instance.indexStage);
+    }
+
+    public void PlayBackgroundMusicStart()
+    {
+        SoundController.Instance.SetBackgroundMusic(AudioClipName.InGameBackground);
+
+        SoundController.Instance.ContinueBackgroundMusic();
     }
 }
