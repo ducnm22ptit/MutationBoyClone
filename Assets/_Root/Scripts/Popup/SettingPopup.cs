@@ -59,7 +59,7 @@ public class SettingPopup : MonoBehaviour
         disableSound.gameObject.SetActive(true);
         enableSound.gameObject.SetActive(false);
         DataController.Instance.isSound = false;
-        SoundController.Instance.PauseBackgroundMusic();
+        SoundController.Instance.PauseAllSound();
 
     }
     private void ToggleSound()
@@ -86,7 +86,7 @@ public class SettingPopup : MonoBehaviour
     {
         disableMusic.gameObject.SetActive(true);
         DataController.Instance.isMusic = false;
-        SoundController.Instance.PauseBackgroundMusic();
+        SoundController.Instance.PauseAllSound();
     }
     private void ToggleMusic()
     {

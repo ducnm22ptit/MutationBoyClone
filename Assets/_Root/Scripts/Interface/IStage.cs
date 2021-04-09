@@ -7,5 +7,4 @@ public interface IStage
     void OnPass();
     void OnFail();
 
-
 }

@@ -198,6 +198,10 @@ MonoBehaviour:
   spritePass: {fileID: 21300000, guid: 82df7e57a65a07146a41ec82bdac2b36, type: 3}
   spriteCurrent: {fileID: 21300000, guid: 544bef6a36f26d24d829d0440b8aedda, type: 3}
   spriteLock: {fileID: 21300000, guid: d5fee493b6ecfc14c91434920713f62a, type: 3}
+  homeController: {fileID: 2354184557411293894, guid: fc18ac4b1b6f5fc489b0766891e8e1e8,
+    type: 3}
+  gameController: {fileID: 3846035318613199805, guid: a1efafee26b45f14fab10396d1fbe3d8,
+    type: 3}
 --- !u!114 &4017270962965605530
 MonoBehaviour:
   m_ObjectHideFlags: 0

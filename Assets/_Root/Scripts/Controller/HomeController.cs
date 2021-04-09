@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 using TMPro;
 
 
@@ -18,27 +19,34 @@ public class HomeController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI coinText;
 
-    private int _nextScene;
+    [SerializeField] private TextMeshProUGUI levelText;
+
+
 
 
     private void Start()
     {
-        _nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-
         tapToStartBtn.onClick.AddListener(NextToScene);
 
+        tapToStartBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f),0.7f).SetLoops(-1, LoopType.Yoyo);
+
         stageBtn.onClick.AddListener(OpenStagePopup);
+
         settingBtn.onClick.AddListener(OpenSetting);
 
-        SoundController.Instance.SetBackgroundMusic(AudioClipName.InGameBackground);
+        SoundController.Instance.SetBackgroundMusic(AudioClipName.UIBackground);
 
         SoundController.Instance.ContinueBackgroundMusic();
 
-        coinText.text = DataController.Instance.coinReward.ToString();
+        coinText.text = ((int)DataController.Instance.coinReward).ToString();
+
+        levelText.text = ("Level " + (DataController.Instance.indexStage + 1).ToString());
     }
-    private void NextToScene()
+    public void NextToScene()
     {
-        SceneManager.LoadScene(_nextScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        //GameController.Instance.PlayStageCurrent(DataController.Instance.indexStage);
     }
     private void OpenStagePopup()
     {

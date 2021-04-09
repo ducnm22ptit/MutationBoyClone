@@ -20,10 +20,12 @@ public class Item : MonoBehaviour
 
     [SerializeField] private Sprite spriteLock;
 
+    [SerializeField] private HomeController homeController;
 
+    [SerializeField] private GameController gameController;
 
     private int _saveItem;
-    private GameConfig _gameConfig;
+
     private Image _image;
 
     private void Awake()
@@ -33,20 +35,21 @@ public class Item : MonoBehaviour
         _image = itemdBtn.gameObject.GetComponent<Image>();
 
     }
-    public void CheckActiveItem(int i, GameConfig gameConfig)
+    public void CheckActiveItem(int i)
     {
-        _saveItem = i + 1;
-        _gameConfig = gameConfig;
+        _saveItem = i;
 
-        if (i < _gameConfig.currentItem)
+        if (i < DataController.Instance.currentStage)
         {
             _image.sprite = spritePass;
 
             itemIndex.text = (i + 1).ToString();
+
         }
-        else if (i == _gameConfig.currentItem)
+        else if (i == DataController.Instance.currentStage)
         {
             _image.sprite = spriteCurrent;
+
             itemIndex.text = (i + 1).ToString();
         }
         else
@@ -58,19 +61,29 @@ public class Item : MonoBehaviour
 
     public void CheckStatusItem()
     {
-        if (_saveItem < _gameConfig.currentItem)
+        if (_saveItem < DataController.Instance.currentStage)
         {
+            Debug.Log("Pass");
             Debug.Log(_saveItem);
-            Debug.Log("Passed");
+
+            DataController.Instance.currentStage = _saveItem;
+
+            homeController.NextToScene();
+            
+            gameController.PlayStageCurrent(_saveItem);
+
         }
-        else if (_saveItem == _gameConfig.currentItem)
+        else if (_saveItem == DataController.Instance.currentStage)
         {
-            Debug.Log(_saveItem);
+
             Debug.Log("Current");
-        }
-        else
-        {
-            Debug.Log("Lock");
+            Debug.Log(_saveItem);
+
+            DataController.Instance.currentStage = _saveItem;
+
+            homeController.NextToScene();
+
+            gameController.PlayStageCurrent(_saveItem);
         }
     }
 

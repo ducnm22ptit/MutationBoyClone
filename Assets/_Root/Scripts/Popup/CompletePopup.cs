@@ -29,6 +29,8 @@ public class CompletePopup : MonoBehaviour
         tapContinueBtn.onClick.AddListener(TapToContinue);
 
         coinText.text = DataController.Instance.coinReward.ToString();
+
+        CoinController.Instance.ReceivingCoin();
     }
 
     private void BackPopup()
@@ -41,7 +43,8 @@ public class CompletePopup : MonoBehaviour
 
     private void TapToContinue()
     {
-
+        GameController.Instance.NextStage();
+        completePopup.SetActive(false);
     }
 
     private void ClaimCoin()
@@ -63,7 +66,7 @@ public class CompletePopup : MonoBehaviour
             
             DataController.Instance.coinReward = x;
         },
-        DataController.Instance.coinReward + 50,
+        DataController.Instance.coinReward * 5,
         2f);
 
         
