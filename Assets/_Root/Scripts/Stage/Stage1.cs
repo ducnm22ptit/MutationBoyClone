@@ -7,17 +7,26 @@ using DG.Tweening;
 
 public class Stage1 : StageOneLevel
 {
-    [SerializeField] private SkeletonAnimation boy;
+    [SerializeField] private SkeletonAnimation boyAnim;
 
-    [SerializeField] private SkeletonAnimation mosquito;
+    [SerializeField] private SkeletonAnimation mosquitoAnim;
 
-    [SerializeField] private SkeletonAnimation mouse;
+    [SerializeField] private SkeletonAnimation mouseAnim;
 
-    [SerializeField] private ParticleSystem smokeBienFx, smokeMosquitoFx, electricFx;
+    [SerializeField] private SkeletonAnimation doctorFirstAnim;
 
-    [SerializeField] private GameObject boyStop, electricPlug, electricBroke, lazerRay, mosquitoStop, mosquitoDie;
+    [SerializeField] private SkeletonAnimation doctorSecondAnim;
+
+    [SerializeField] private ParticleSystem smokeBienFx, smokeMosquitoFx, earthQuake, electricFxFirst, electricFxSecond, electricFxFinal, exploreFx;
+
+    [SerializeField] private GameObject boyStop, shadowBoyStop, shadowBoy, electricPlug, electricBroke, lazerRay, mosquitoStop, mosquitoDie, jumpPos;
+
+    [SerializeField] private GameObject brokeMachine, normalMachine;
 
     [SerializeField] private Button optionLeft, optionRight;
+
+    [SerializeField] private SpriteRenderer overlaySprite;
+
     private void Start()
     {
         optionLeft.onClick.AddListener(Option1);
@@ -51,14 +60,100 @@ public class Stage1 : StageOneLevel
 
     private void IntroStage()
     {
-        boy.AnimationState.SetAnimation(0, "0/run", true);
-
-        SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
-
-        boy.gameObject.transform.DOMoveX(boyStop.transform.position.x, 2f).SetEase(Ease.Linear).OnComplete(() =>
+        // start intro Game
+        Camera.main.transform.DOMoveX(-10.85f, 0);
+        shadowBoy.transform.DOMoveY(shadowBoyStop.transform.position.y, 2.5f).OnComplete(() =>
         {
-            boy.AnimationState.SetAnimation(0, "0/afraid", true);
-            ShowOptionUI();
+
+            overlaySprite.DOFade(1, 3f).OnComplete(() =>
+            {
+                Camera.main.transform.DOMoveX(-7.47f, 0);
+                overlaySprite.DOFade(0, 3f);
+                doctorFirstAnim.AnimationState.SetAnimation(0, "research", true);
+                doctorSecondAnim.AnimationState.SetAnimation(0, "research", true);
+
+                DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
+                {
+
+                    Camera.main.transform.DOShakePosition(4, 1, 3, 1, false, true);
+                    earthQuake.Play();
+                    doctorFirstAnim.AnimationState.SetAnimation(0, "worry 1", true);
+                    doctorSecondAnim.AnimationState.SetAnimation(0, "worry 1", true);
+
+                    DOTween.Sequence().AppendInterval(1).AppendCallback(() =>
+                    {
+
+                        doctorFirstAnim.AnimationState.SetAnimation(0, "worry 2", true);
+                        doctorSecondAnim.AnimationState.SetAnimation(0, "worry 2", true);
+                    });
+                    DOTween.Sequence().AppendInterval(2.5f).AppendCallback(() =>
+                    {
+                        overlaySprite.DOFade(1, 2.5f).OnComplete(() =>
+                        {
+                            Camera.main.transform.DOMoveX(-10.85f, 0);
+                            overlaySprite.DOFade(0, 2.5f);
+                            Camera.main.transform.DOShakePosition(4, 1, 3, 0.5f, false, true);
+                            electricFxSecond.Play();
+                            electricFxFirst.Play();
+                            DOTween.Sequence().AppendInterval(2).AppendCallback(() =>
+                            {
+                                exploreFx.Play();
+                                shadowBoy.SetActive(false);
+                                normalMachine.SetActive(false);
+                                brokeMachine.SetActive(true);
+                                boyAnim.gameObject.SetActive(true);
+                                boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
+                                boyAnim.gameObject.transform.DOMove(jumpPos.transform.position, 1f).OnComplete(() =>
+                                {
+
+                                    boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+                                    DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
+                                    {
+                                        boyAnim.AnimationState.SetAnimation(0, "0/run", true);
+                                        SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
+                                        boyAnim.gameObject.transform.DOMoveX(boyStop.transform.position.x, 10f).SetEase(Ease.Linear).OnComplete(() =>
+                                        {
+                                            boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+                                            ShowOptionUI();
+                                        });
+                                        overlaySprite.DOFade(1, 2.5f).OnComplete(() =>
+                                        {
+                                            Camera.main.transform.DOMoveX(-7.47f, 0).OnComplete(() =>
+                                            {
+                                                overlaySprite.DOFade(0, 2.5f);
+                                            });
+                                            DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+                                            {
+                                                overlaySprite.DOFade(1, 2.5f).OnComplete(() =>
+                                                {
+
+                                                    Camera.main.transform.DOMoveX(0, 0).OnComplete(() =>
+                                                        {
+                                                            overlaySprite.DOFade(0, 2.5f);
+
+                                                        });
+
+
+                                                });
+                                            });
+                                        });
+                                    });
+
+                                });
+
+
+
+                            });
+                        });
+
+
+
+                    });
+
+                });
+
+            });
+
         });
     }
 
@@ -71,18 +166,18 @@ public class Stage1 : StageOneLevel
 
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
-        boy.gameObject.SetActive(false);
-        mouse.gameObject.SetActive(true);
-        mouse.AnimationState.SetAnimation(0, "idle", true);
+        boyAnim.gameObject.SetActive(false);
+        mouseAnim.gameObject.SetActive(true);
+        mouseAnim.AnimationState.SetAnimation(0, "idle", true);
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
-            mouse.AnimationState.SetAnimation(0, "attack", true);
+            mouseAnim.AnimationState.SetAnimation(0, "attack", true);
             DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
             {
                 electricPlug.SetActive(false);
                 electricBroke.SetActive(true);
-                electricFx.gameObject.SetActive(true);
-                electricFx.Play();
+                electricFxFinal.gameObject.SetActive(true);
+                electricFxFinal.Play();
 
                 BeforeOnPass();
 
@@ -93,15 +188,15 @@ public class Stage1 : StageOneLevel
 
                     SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
-                    mouse.gameObject.SetActive(false);
-                    boy.gameObject.SetActive(true);
-                    boy.AnimationState.SetAnimation(0, "idle", true);
+                    mouseAnim.gameObject.SetActive(false);
+                    boyAnim.gameObject.SetActive(true);
+                    boyAnim.AnimationState.SetAnimation(0, "idle", true);
 
                     DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
                     {
                         HideOptionUI();
-                        boy.AnimationState.SetAnimation(0, "0/run", true);
-                        boy.gameObject.transform.DOMoveX(4, 3f).OnComplete(() =>
+                        boyAnim.AnimationState.SetAnimation(0, "0/run", true);
+                        boyAnim.gameObject.transform.DOMoveX(4, 3f).OnComplete(() =>
                         {
                             OnPass();
                         });
@@ -121,19 +216,19 @@ public class Stage1 : StageOneLevel
 
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
-        boy.gameObject.SetActive(false);
-        mosquito.gameObject.SetActive(true);
-        mosquito.AnimationState.SetAnimation(0, "fly", true);
+        boyAnim.gameObject.SetActive(false);
+        mosquitoAnim.gameObject.SetActive(true);
+        mosquitoAnim.AnimationState.SetAnimation(0, "fly", true);
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             SoundController.Instance.PlaySoundFx(AudioClipName.Fly);
 
-            mosquito.gameObject.transform.DOMove(new Vector3(mosquitoStop.transform.position.x, mosquito.transform.position.y, mosquito.transform.position.z), 2f).OnComplete(() =>
+            mosquitoAnim.gameObject.transform.DOMove(new Vector3(mosquitoStop.transform.position.x, mosquitoAnim.transform.position.y, mosquitoAnim.transform.position.z), 2f).OnComplete(() =>
             {
-                mosquito.AnimationState.SetAnimation(0, "die", true);
+                mosquitoAnim.AnimationState.SetAnimation(0, "die", true);
                 smokeMosquitoFx.Play();
                 BeforeOnFail();
-                mosquito.gameObject.transform.DOMove(new Vector3(mosquitoDie.transform.position.x, mosquitoDie.transform.position.y, mosquito.transform.position.z), 0.5f).OnComplete(() =>
+                mosquitoAnim.gameObject.transform.DOMove(new Vector3(mosquitoDie.transform.position.x, mosquitoDie.transform.position.y, mosquitoAnim.transform.position.z), 0.5f).OnComplete(() =>
                 {
                     DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
                     {
