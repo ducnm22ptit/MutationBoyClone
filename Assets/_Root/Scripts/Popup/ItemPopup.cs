@@ -22,9 +22,9 @@ public class ItemPopup : MonoBehaviour
     {
         backBtn.onClick.AddListener(BackToHome);
 
-        var i = DataController.Instance.indexStage;
+        //var i = DataController.Instance.indexStage;
 
-        for (i = 0; i < gameConfig.Stages.Count; i++)
+        for (int i = 0; i < gameConfig.Stages.Count; i++)
         {
             Item item = Instantiate(itemPrefab, content.transform);      
 

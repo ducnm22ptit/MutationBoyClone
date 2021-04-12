@@ -10,7 +10,7 @@ public class BaseStage : MonoBehaviour
 
     protected virtual void OnPass()
     {
-        SoundController.Instance.PauseAllSound();
+        SoundController.Instance.StopAllSound();
         PopupController.Instance.ShowPopup(PopupName.CompletePopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopupAdd);
@@ -19,7 +19,7 @@ public class BaseStage : MonoBehaviour
 
     protected virtual void OnFail()
     {
-        SoundController.Instance.PauseAllSound();
+        SoundController.Instance.StopAllSound();
         PopupController.Instance.ShowPopup(PopupName.GameoverPopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
     }

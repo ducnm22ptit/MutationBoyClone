@@ -10,15 +10,13 @@ public class GameController : Singleton<GameController>
 
     void Start()
     {
-        PlayStageCurrent(DataController.Instance.indexStage);
+        PlayBackgroundMusicStart();
 
-        PlayBackgroundMusicStart();   
+        PlayStageCurrent(DataController.Instance.currentStage);
     }
 
     public void PlayStageCurrent(int index)
     {
-        Debug.Log(index);
-
         if (_currentStage != null)
         {
             DestroyImmediate(_currentStage.gameObject,true);
@@ -29,8 +27,11 @@ public class GameController : Singleton<GameController>
 
     public void NextStage()
     {
+        SoundController.Instance.StopAllSound();
         DataController.Instance.indexStage += 1;
-        PlayStageCurrent(DataController.Instance.indexStage);
+        DataController.Instance.currentStage = DataController.Instance.indexStage;
+        PlayStageCurrent(DataController.Instance.currentStage);
+        GameController.Instance.PlayBackgroundMusicStart();
     }
 
     public void PlayBackgroundMusicStart()

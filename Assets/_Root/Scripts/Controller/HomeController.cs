@@ -46,7 +46,7 @@ public class HomeController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        //GameController.Instance.PlayStageCurrent(DataController.Instance.indexStage);
+        DataController.Instance.currentStage = DataController.Instance.indexStage;
     }
     private void OpenStagePopup()
     {

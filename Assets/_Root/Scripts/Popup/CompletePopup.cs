@@ -31,6 +31,12 @@ public class CompletePopup : MonoBehaviour
         coinText.text = DataController.Instance.coinReward.ToString();
 
         CoinController.Instance.ReceivingCoin();
+
+        DOTween.Sequence().AppendInterval(1.7f).AppendCallback(() => {
+
+            tapContinueBtn.gameObject.SetActive(true);
+            tapContinueBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.7f).SetLoops(-1, LoopType.Yoyo);
+        });
     }
 
     private void BackPopup()

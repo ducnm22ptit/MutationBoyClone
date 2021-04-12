@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Item : MonoBehaviour
@@ -39,14 +40,14 @@ public class Item : MonoBehaviour
     {
         _saveItem = i;
 
-        if (i < DataController.Instance.currentStage)
+        if (i < DataController.Instance.indexStage)
         {
             _image.sprite = spritePass;
 
             itemIndex.text = (i + 1).ToString();
 
         }
-        else if (i == DataController.Instance.currentStage)
+        else if (i == DataController.Instance.indexStage)
         {
             _image.sprite = spriteCurrent;
 
@@ -61,30 +62,20 @@ public class Item : MonoBehaviour
 
     public void CheckStatusItem()
     {
-        if (_saveItem < DataController.Instance.currentStage)
-        {
-            Debug.Log("Pass");
-            Debug.Log(_saveItem);
+        DataController.Instance.currentStage = _saveItem;
 
-            DataController.Instance.currentStage = _saveItem;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-            homeController.NextToScene();
-            
-            gameController.PlayStageCurrent(_saveItem);
-
-        }
-        else if (_saveItem == DataController.Instance.currentStage)
-        {
-
-            Debug.Log("Current");
-            Debug.Log(_saveItem);
-
-            DataController.Instance.currentStage = _saveItem;
-
-            homeController.NextToScene();
-
-            gameController.PlayStageCurrent(_saveItem);
-        }
+        //if (_saveItem < DataController.Instance.indexStage)
+        //{
+        //    DataController.Instance.currentStage = _saveItem;
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //}
+        //else if (_saveItem == DataController.Instance.indexStage)
+        //{
+        //    gameController.PlayStageCurrent(_saveItem);
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //}
     }
 
 }

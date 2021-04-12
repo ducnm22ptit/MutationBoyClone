@@ -29,12 +29,17 @@ public class SoundController : Singleton<SoundController>
     {
         audioSourceBg.Pause();
     }
+
+    public void StopAllSound()
+    {
+        audioSourceBg.Stop();
+    }
+
     public void ContinueBackgroundMusic()
     {
 
         if (DataController.Instance.isMusic && DataController.Instance.isSound)
-        {
-            Debug.Log("bat");
+        { 
             audioSourceBg.Play();
         }
     }
