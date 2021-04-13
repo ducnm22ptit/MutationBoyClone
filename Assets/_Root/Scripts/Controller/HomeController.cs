@@ -21,7 +21,7 @@ public class HomeController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI levelText;
 
-
+    [SerializeField] private GameController gameController;
 
 
     private void Start()
@@ -45,8 +45,6 @@ public class HomeController : MonoBehaviour
     public void NextToScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        DataController.Instance.currentStage = DataController.Instance.indexStage;
     }
     private void OpenStagePopup()
     {

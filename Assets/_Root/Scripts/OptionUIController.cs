@@ -63,12 +63,20 @@ public class OptionUIController : Singleton<OptionUIController>
         {
             progressBarList[(int)progressBarName].transform.GetChild(0).transform.GetComponent<Image>().color = color;
         }
+        else if (progressBarList[(int)progressBarName].transform.GetChild(1).transform.name == nameBar)
+        {
+            progressBarList[(int)progressBarName].transform.GetChild(1).transform.GetComponent<Image>().color = color;
+        }
+        else if (progressBarList[(int)progressBarName].transform.GetChild(2).transform.name == nameBar)
+        {
+            progressBarList[(int)progressBarName].transform.GetChild(2).transform.GetComponent<Image>().color = color;
+        }
     }
 
     private void SetIndexText()
     {
-        textFrom.text = (DataController.Instance.indexStage + 1).ToString();
-        textTo.text = (DataController.Instance.indexStage + 2).ToString();
+        textFrom.text = (DataController.Instance.currentStage + 1).ToString();
+        textTo.text = (DataController.Instance.currentStage + 2).ToString();
     }
 
     private void ShowResultButton(RectTransform transform)

@@ -20,8 +20,16 @@ public class CompletePopup : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
 
 
+    private void OnEnable()
+    {
+        claimBtn.gameObject.SetActive(true);
+        CoinController.Instance.ReceivingCoin();
+    }
+
     void Start()
     {
+        
+
         claimBtn.onClick.AddListener(ClaimCoin);
 
         backButton.onClick.AddListener(BackPopup);
@@ -30,8 +38,7 @@ public class CompletePopup : MonoBehaviour
 
         coinText.text = DataController.Instance.coinReward.ToString();
 
-        CoinController.Instance.ReceivingCoin();
-
+      
         DOTween.Sequence().AppendInterval(1.7f).AppendCallback(() => {
 
             tapContinueBtn.gameObject.SetActive(true);
@@ -59,6 +66,8 @@ public class CompletePopup : MonoBehaviour
 
         float _myFloat = DataController.Instance.coinReward;
 
+        DataController.Instance.coinReward += 250;
+
         DOTween.To(() =>
         {
             return _myFloat;
@@ -69,11 +78,10 @@ public class CompletePopup : MonoBehaviour
             _myFloat = x;
 
             coinText.text = ((int)x).ToString();
-            
-            DataController.Instance.coinReward = x;
-        },
-        DataController.Instance.coinReward * 5,
-        2f);
+
+        },DataController.Instance.coinReward
+        ,
+        1f);
 
         
     }

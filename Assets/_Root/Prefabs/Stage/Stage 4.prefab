@@ -192,7 +192,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
 --- !u!114 &8244503511831508817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +436,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+  - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,11 +487,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: 0/run
   loop: 0

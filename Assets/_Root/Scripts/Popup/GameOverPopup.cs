@@ -11,7 +11,7 @@ public class GameOverPopup : MonoBehaviour
         DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
         {
             PopupController.Instance.HidePopup(PopupName.GameoverPopup);
-            GameController.Instance.PlayStageCurrent(DataController.Instance.indexStage);
+            GameController.Instance.PlayStageCurrent();
         }).OnComplete(() =>
         {
             GameController.Instance.PlayBackgroundMusicStart();

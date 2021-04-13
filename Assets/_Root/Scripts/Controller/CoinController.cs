@@ -13,6 +13,7 @@ public class CoinController : Singleton<CoinController>
 
     public void ReceivingCoin()
     {
+
         float _myFloat = DataController.Instance.coinReward;
 
         DOTween.To(() =>
@@ -26,10 +27,9 @@ public class CoinController : Singleton<CoinController>
 
             coinText.text = ((int)x).ToString();
 
-            DataController.Instance.coinReward = x;
         },
         DataController.Instance.coinReward + 50,
-        2f);
+        1f);
     }
 
  

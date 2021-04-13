@@ -74,18 +74,13 @@ public class Stage1 : StageOneLevel
 
                 DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
                 {
-
                     Camera.main.transform.DOShakePosition(4, 1, 3, 1, false, true);
                     earthQuake.Play();
-                    doctorFirstAnim.AnimationState.SetAnimation(0, "worry 1", true);
-                    doctorSecondAnim.AnimationState.SetAnimation(0, "worry 1", true);
+                    doctorFirstAnim.AnimationState.SetAnimation(0, "worry 1", false);
+                    doctorSecondAnim.AnimationState.SetAnimation(0, "worry 1", false);
+                    doctorFirstAnim.AnimationState.SetAnimation(0, "worry 2", true);
+                    doctorSecondAnim.AnimationState.SetAnimation(0, "worry 2", true);
 
-                    DOTween.Sequence().AppendInterval(1).AppendCallback(() =>
-                    {
-
-                        doctorFirstAnim.AnimationState.SetAnimation(0, "worry 2", true);
-                        doctorSecondAnim.AnimationState.SetAnimation(0, "worry 2", true);
-                    });
                     DOTween.Sequence().AppendInterval(2.5f).AppendCallback(() =>
                     {
                         overlaySprite.DOFade(1, 2.5f).OnComplete(() =>
@@ -105,7 +100,6 @@ public class Stage1 : StageOneLevel
                                 boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
                                 boyAnim.gameObject.transform.DOMove(jumpPos.transform.position, 1f).OnComplete(() =>
                                 {
-
                                     boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
                                     DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
                                     {
@@ -126,39 +120,26 @@ public class Stage1 : StageOneLevel
                                             {
                                                 overlaySprite.DOFade(1, 2.5f).OnComplete(() =>
                                                 {
-
                                                     Camera.main.transform.DOMoveX(0, 0).OnComplete(() =>
-                                                        {
-                                                            overlaySprite.DOFade(0, 2.5f);
-
-                                                        });
-
-
+                                                    {
+                                                       overlaySprite.DOFade(0, 2.5f);
+                                                    });
                                                 });
                                             });
                                         });
                                     });
-
                                 });
-
-
-
                             });
                         });
-
-
-
                     });
-
                 });
-
             });
-
         });
     }
 
     private void Option1()
     {
+        optionRight.onClick.RemoveAllListeners();
         optionLeft.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
@@ -210,6 +191,7 @@ public class Stage1 : StageOneLevel
     {
 
         optionRight.onClick.RemoveAllListeners();
+        optionLeft.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();

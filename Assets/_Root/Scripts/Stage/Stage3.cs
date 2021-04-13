@@ -68,7 +68,10 @@ public class Stage3 : StageOneLevel
 
     private void Option1()
     {
+
+        optionRight.onClick.RemoveAllListeners();
         optionLeft.onClick.RemoveAllListeners();
+
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();
         boyAnim.gameObject.SetActive(false);
@@ -114,7 +117,10 @@ public class Stage3 : StageOneLevel
 
     private void Option2()
     {
+
         optionRight.onClick.RemoveAllListeners();
+        optionLeft.onClick.RemoveAllListeners();
+
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();
         boyAnim.gameObject.SetActive(false);

@@ -107,6 +107,8 @@ public class Stage2 : StageOneLevel
 
     private void Option1()
     {
+
+        optionRight.onClick.RemoveAllListeners();
         optionLeft.onClick.RemoveAllListeners();
 
         smokeBienFx.Play();
@@ -158,7 +160,9 @@ public class Stage2 : StageOneLevel
 
     private void Option2()
     {
+
         optionRight.onClick.RemoveAllListeners();
+        optionLeft.onClick.RemoveAllListeners();
 
         smokeBienFx.Play();
         boy.gameObject.SetActive(false);

@@ -11,26 +11,30 @@ public class GameController : Singleton<GameController>
     void Start()
     {
         PlayBackgroundMusicStart();
-
-        PlayStageCurrent(DataController.Instance.currentStage);
+        PlayStageCurrent();
     }
 
-    public void PlayStageCurrent(int index)
+    public void PlayStageCurrent()
     {
         if (_currentStage != null)
         {
             DestroyImmediate(_currentStage.gameObject,true);
         }
-
-       _currentStage =  Instantiate(gameConfig.Stages[index]);
+        
+       _currentStage =  Instantiate(gameConfig.Stages[DataController.Instance.currentStage]);
     }
+
 
     public void NextStage()
     {
+        if (DataController.Instance.currentStage == DataController.Instance.indexStage)
+        {
+            DataController.Instance.indexStage += 1;         
+        }
+
         SoundController.Instance.StopAllSound();
-        DataController.Instance.indexStage += 1;
-        DataController.Instance.currentStage = DataController.Instance.indexStage;
-        PlayStageCurrent(DataController.Instance.currentStage);
+        DataController.Instance.currentStage += 1;
+        PlayStageCurrent();
         GameController.Instance.PlayBackgroundMusicStart();
     }
 
