@@ -56,6 +56,7 @@ public class CompletePopup : MonoBehaviour
 
     private void TapToContinue()
     {
+        DataController.Instance.indexLevel += 1;
         GameController.Instance.NextStage();
         completePopup.SetActive(false);
     }

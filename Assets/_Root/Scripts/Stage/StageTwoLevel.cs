@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+
 
 public class StageTwoLevel : BaseStage
 {
+    [SerializeField] private Sprite optionFirstImg;
+
+    [SerializeField] private Sprite optionSecondImg;
+
     protected override void ShowOptionUI()
     {
         OptionUIController.Instance.ShowProgressBar(ProgressBarName.ProgressBarTwoLevel);
@@ -26,7 +32,8 @@ public class StageTwoLevel : BaseStage
 
     protected void ChangeImgOptionUI()
     {
-
+        OptionUI.transform.GetChild(0).GetComponentInChildren<Image>().sprite = optionFirstImg;
+        OptionUI.transform.GetChild(1).GetComponentInChildren<Image>().sprite = optionSecondImg;
     }
 
     protected virtual void BeforeOnPass(NameLevelPass nameLevelPass)
@@ -39,7 +46,6 @@ public class StageTwoLevel : BaseStage
         else if((int)nameLevelPass == 1)
         {
             OptionUIController.Instance.ChangeColorBar(ProgressBarName.ProgressBarTwoLevel, Color.green, "Bar22");
-            Debug.Log("PassLevelTwo");
         }
     }
 
@@ -52,7 +58,6 @@ public class StageTwoLevel : BaseStage
         else if ((int)nameLevelPass == 1)
         {
             OptionUIController.Instance.ChangeColorBar(ProgressBarName.ProgressBarTwoLevel, Color.red, "Bar22");
-            Debug.Log("PassLevelTwo");
         }
     }
 }

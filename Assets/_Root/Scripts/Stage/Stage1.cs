@@ -23,15 +23,15 @@ public class Stage1 : StageOneLevel
 
     [SerializeField] private GameObject brokeMachine, normalMachine;
 
-    [SerializeField] private Button optionLeft, optionRight;
+    [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     [SerializeField] private SpriteRenderer overlaySprite;
 
     private void Start()
     {
-        optionLeft.onClick.AddListener(Option1);
+        optionLeftBtn.onClick.AddListener(Option1);
 
-        optionRight.onClick.AddListener(Option2);
+        optionRightBtn.onClick.AddListener(Option2);
 
         IntroStage();
     }
@@ -142,8 +142,8 @@ public class Stage1 : StageOneLevel
 
     private void Option1()
     {
-        optionRight.onClick.RemoveAllListeners();
-        optionLeft.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();
@@ -193,8 +193,8 @@ public class Stage1 : StageOneLevel
     private void Option2()
     {
 
-        optionRight.onClick.RemoveAllListeners();
-        optionLeft.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();

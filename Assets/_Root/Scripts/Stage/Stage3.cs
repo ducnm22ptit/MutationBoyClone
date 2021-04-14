@@ -14,7 +14,7 @@ public class Stage3 : StageOneLevel
 
     [SerializeField] private GameObject boyStop, wallStop, obstaclesWall, leftWall, rightWall, hideDoor;
 
-    [SerializeField] private Button optionLeft, optionRight;
+    [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
 
 
@@ -22,9 +22,9 @@ public class Stage3 : StageOneLevel
     {
         Camera.main.transform.DOMoveX(0, 0);
 
-        optionLeft.onClick.AddListener(Option1);
+        optionLeftBtn.onClick.AddListener(Option1);
 
-        optionRight.onClick.AddListener(Option2);
+        optionRightBtn.onClick.AddListener(Option2);
 
         IntroStage();
     }
@@ -69,8 +69,8 @@ public class Stage3 : StageOneLevel
     private void Option1()
     {
 
-        optionRight.onClick.RemoveAllListeners();
-        optionLeft.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();
@@ -118,8 +118,8 @@ public class Stage3 : StageOneLevel
     private void Option2()
     {
 
-        optionRight.onClick.RemoveAllListeners();
-        optionLeft.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveAllListeners();
 
         smokeBienFx.gameObject.SetActive(true);
         smokeBienFx.Play();

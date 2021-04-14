@@ -41,11 +41,14 @@ public class CoutinuePopup : MonoBehaviour
         DataController.Instance.coinReward -= 200;
         minusCoinBtn.gameObject.SetActive(false);
         continuePopup.SetActive(false);
+
     }
 
     private void FreeCoin()
     {
         continuePopup.SetActive(false);
+        GameController.Instance.PlayStageCurrent();
+        
     }
 
 
