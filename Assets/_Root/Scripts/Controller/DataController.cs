@@ -12,6 +12,8 @@ public class DataController : Singleton<DataController>
 
     private const string CURRENT_STAGE = "CURRENT_STAGE";
 
+    private const string INDEX_LEVEL = "INDEX_LEVEL";
+
     private const string COIN_REWARD = "COIN_REWARD";
 
     public bool isSound
@@ -59,6 +61,18 @@ public class DataController : Singleton<DataController>
         set
         {
             PlayerPrefs.SetInt(CURRENT_STAGE, value);
+        }
+    }
+
+    public int indexLevel
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(INDEX_STAGE + "-", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt(INDEX_STAGE + "-", value);
         }
     }
 

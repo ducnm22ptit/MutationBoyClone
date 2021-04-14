@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stage6 : StageTwoLevel
 {
     
-    void Start()
+    void Start() 
     {
         
     }

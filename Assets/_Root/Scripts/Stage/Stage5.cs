@@ -30,6 +30,7 @@ public class Stage5 : StageOneLevel
     private void IntroStage()
     {
         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
+        SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
         boyAnim.gameObject.transform.DOMoveX(boyStop.transform.position.x, 4f).OnComplete(() =>
         {
             boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
@@ -93,6 +94,7 @@ public class Stage5 : StageOneLevel
             securityFirstAnim.gameObject.transform.DOMoveX(enemyBackPos.transform.position.x, 3f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 smokeBienFx.Play();
+                SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                 boyAnim.gameObject.SetActive(true);
                 dinoAnim.gameObject.SetActive(false);
                 boyAnim.AnimationState.SetAnimation(0, "0/run", true);

@@ -70,6 +70,8 @@ public class Stage4 : StageOneLevel
         mosquitoAnim.gameObject.SetActive(true);
         mosquitoAnim.AnimationState.SetAnimation(0, "fly", true);
 
+        SoundController.Instance.PlaySoundFx(AudioClipName.Fly);
+
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() => {
 
             mosquitoAnim.gameObject.transform.DOMoveX(mosquitoAnim.gameObject.transform.position.x - 5f, 2f);

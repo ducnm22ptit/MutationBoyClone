@@ -88,8 +88,11 @@ public class Stage1 : StageOneLevel
                             Camera.main.transform.DOMoveX(-10.85f, 0);
                             overlaySprite.DOFade(0, 2.5f);
                             Camera.main.transform.DOShakePosition(4, 1, 3, 0.5f, false, true);
-                            electricFxSecond.Play();
-                            electricFxFirst.Play();
+                            DOTween.Sequence().AppendInterval(1).AppendCallback(() =>
+                            {
+                                electricFxSecond.Play();
+                                electricFxFirst.Play();
+                            });
                             DOTween.Sequence().AppendInterval(2).AppendCallback(() =>
                             {
                                 exploreFx.Play();
@@ -122,7 +125,7 @@ public class Stage1 : StageOneLevel
                                                 {
                                                     Camera.main.transform.DOMoveX(0, 0).OnComplete(() =>
                                                     {
-                                                       overlaySprite.DOFade(0, 2.5f);
+                                                        overlaySprite.DOFade(0, 2.5f);
                                                     });
                                                 });
                                             });

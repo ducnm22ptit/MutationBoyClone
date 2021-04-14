@@ -9,12 +9,24 @@ public class StageTwoLevel : BaseStage
         OptionUIController.Instance.ShowProgressBar(ProgressBarName.ProgressBarTwoLevel);
 
         base.ShowOptionUI();
-        Debug.Log("Show");
     }
 
     protected override void HideOptionUI()
     {
         base.HideOptionUI();
+    }
+
+    protected virtual void OnContinue()
+    {
+        SoundController.Instance.StopAllSound();
+        PopupController.Instance.ShowPopup(PopupName.ContinuePopup);
+        SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
+        SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
+    }
+
+    protected void ChangeImgOptionUI()
+    {
+
     }
 
     protected virtual void BeforeOnPass(NameLevelPass nameLevelPass)

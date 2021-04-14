@@ -14,7 +14,6 @@ public class BaseStage : MonoBehaviour
         PopupController.Instance.ShowPopup(PopupName.CompletePopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopupAdd);
-
     }
 
     protected virtual void OnFail()
