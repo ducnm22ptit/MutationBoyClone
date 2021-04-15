@@ -559,8 +559,8 @@ MonoBehaviour:
   leftWall: {fileID: 1330055727313813492}
   rightWall: {fileID: 3123716725467078010}
   hideDoor: {fileID: 173923280069000323}
-  optionLeft: {fileID: 2669914973916144395}
-  optionRight: {fileID: 5139356621585355471}
+  optionLeftBtn: {fileID: 2669914973916144395}
+  optionRightBtn: {fileID: 5139356621585355471}
 --- !u!1 &3801601261852534959
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,19 +17,20 @@ public class Stage6 : StageTwoLevel
 
     [SerializeField] private ParticleSystem smokeBienFirstFx, smokeBienSecondFx, electricFx;
 
-    [SerializeField] private GameObject boyStopPos, catStopPos, fishAnim;
+    [SerializeField] private GameObject boyStopPos, catStopPos, fishAnim, guns, lineRayFisrt, lineRaySecond;
 
     [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     [SerializeField] private SpriteRenderer overlaySprite;
 
-    void Start() 
+    void Start()
     {
         Camera.main.transform.DOMoveX(0, 0);
 
         optionLeftBtn.onClick.AddListener(Option1);
 
         optionRightBtn.onClick.AddListener(Option2);
+
 
         IntroStageFirst();
     }
@@ -40,24 +41,24 @@ public class Stage6 : StageTwoLevel
 
         Camera.main.transform.DOMoveX(boyStopPos.transform.position.x, 2f);
 
-        boyAnim.AnimationState.SetAnimation(0, "0/run",true);
+        boyAnim.AnimationState.SetAnimation(0, "0/run", true);
 
         SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
 
         boyAnim.gameObject.transform.DOMoveX(boyStopPos.transform.position.x, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
-            boyAnim.AnimationState.SetAnimation(0,"9/k thay duong",true);
+            boyAnim.AnimationState.SetAnimation(0, "9/k thay duong", true);
             ShowOptionUI();
         });
 
-    
+
     }
 
     private void IntroStageSecond()
     {
         overlaySprite.DOFade(0f, 2f);
         catAnim.AnimationState.SetAnimation(0, "idle", false);
-        smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x,0f);
+        smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
         smokeBienFirstFx.Play();
         catAnim.gameObject.SetActive(false);
         boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
@@ -65,16 +66,20 @@ public class Stage6 : StageTwoLevel
         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
-        
-
         boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x - 6, 4f);
-        Camera.main.transform.DOMoveX(catStopPos.transform.position.x - 6, 4f);
+        Camera.main.transform.DOMoveX(catStopPos.transform.position.x - 6, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            boyAnim.AnimationState.SetAnimation(0, "6/nga", true);
+            ShowOptionUI();
+            optionLeftBtn.onClick.AddListener(Option11);
+            optionRightBtn.onClick.AddListener(Option22);
+        });
     }
 
     private void Option1()
     {
-        optionRightBtn.onClick.RemoveAllListeners();
-        optionLeftBtn.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveListener(Option1);
+        optionLeftBtn.onClick.RemoveListener(Option2);
 
         smokeBienFirstFx.Play();
         boyAnim.gameObject.SetActive(false);
@@ -83,36 +88,70 @@ public class Stage6 : StageTwoLevel
 
         catAnim.gameObject.SetActive(true);
         catAnim.AnimationState.SetAnimation(0, "idle", false);
-        catAnim.AnimationState.SetAnimation(0, "idle flash", false);
-        catAnim.AnimationState.SetAnimation(0, "walk flash", true);
-
-        catAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 3f);
-        BeforeOnPass(NameLevelPass.passLevelFirst);
-
-        Camera.main.transform.DOMoveX(catStopPos.transform.position.x, 5f).OnComplete(() =>
+   
+        DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
         {
-            HideOptionUI();
-            ChangeImgOptionUI();
-            IntroStageSecond();
+            catAnim.AnimationState.SetAnimation(0, "idle flash", false);
+            catAnim.AnimationState.SetAnimation(0, "walk flash", true);
+            catAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 3f);
+            BeforeOnPass(NameLevel.LevelFirst);
+
+        }).OnComplete(() =>
+        {
+            Camera.main.transform.DOMoveX(catStopPos.transform.position.x, 2.5f).OnComplete(() =>
+            {
+                HideOptionUI();
+                IntroStageSecond();
+            });
         });
-      
+        
+
     }
 
     private void Option2()
     {
-        optionRightBtn.onClick.RemoveAllListeners();
-        optionLeftBtn.onClick.RemoveAllListeners();
+        optionRightBtn.onClick.RemoveListener(Option1);
+        optionLeftBtn.onClick.RemoveListener(Option2);
+
+        smokeBienFirstFx.Play();
+        boyAnim.gameObject.SetActive(false);
+
+        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+
+        fireFlyAnim.gameObject.SetActive(true);
+        fireFlyAnim.AnimationState.SetAnimation(0, "fly", true);
+
+        fireFlyAnim.gameObject.transform.DOMoveY(fireFlyAnim.transform.position.y + 1.3f, 3f);
+        guns.transform.DOMoveY(guns.transform.position.y - 1f, 2f).OnComplete(() =>
+        {
+            lineRayFisrt.SetActive(true);
+            lineRaySecond.SetActive(true);
+            DOTween.Sequence().AppendInterval(0.3f).AppendCallback(() =>
+            {
+                fireFlyAnim.AnimationState.SetAnimation(0, "die", true);
+                fireFlyAnim.gameObject.transform.DOMoveY(fireFlyAnim.transform.position.y - 2f, 1f);
+                BeforeOnFail(NameLevel.LevelFirst);
+                DOTween.Sequence().AppendInterval(0.7f).AppendCallback(() =>
+                {
+                    HideOptionUI();
+                    OnFail();
+                });
+            });
+        });
+
     }
 
     private void Option11()
     {
-        optionRightBtn.onClick.RemoveAllListeners();
-        optionLeftBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveListener(Option11);
+        optionRightBtn.onClick.RemoveListener(Option22);
+        Debug.Log("Option11");
     }
 
     private void Option22()
     {
-        optionRightBtn.onClick.RemoveAllListeners();
-        optionLeftBtn.onClick.RemoveAllListeners();
+        optionLeftBtn.onClick.RemoveListener(Option11);
+        optionRightBtn.onClick.RemoveListener(Option22);
+        Debug.Log("Option22");
     }
 }

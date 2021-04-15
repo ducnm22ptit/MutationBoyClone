@@ -30,6 +30,7 @@ public class OptionUIController : Singleton<OptionUIController>
 
     private void Start()
     {
+
         leftBtn.onClick.AddListener(() =>
         {
             ShowResultButton(leftBtn.gameObject.GetComponent<RectTransform>());
@@ -81,7 +82,6 @@ public class OptionUIController : Singleton<OptionUIController>
 
     private void ShowResultButton(RectTransform transform)
     {
-
         if (transform.GetChild(1).transform.name == "Overlay")
         {
             transform.GetChild(1).transform.gameObject.SetActive(true);
@@ -91,21 +91,39 @@ public class OptionUIController : Singleton<OptionUIController>
         {
             if (transform.GetChild(2).transform.name == "Result" && transform.name == "Option2")
             {
-                transform.GetChild(2).transform.gameObject.SetActive(true);
                 SoundController.Instance.PlaySoundFx(AudioClipName.FailChoose1);
-                rightBtn.onClick.RemoveAllListeners();
             }
             else if (transform.GetChild(2).transform.name == "Result" && transform.name == "Option1")
             {
-                transform.GetChild(2).transform.gameObject.SetActive(true);
                 SoundController.Instance.PlaySoundFx(AudioClipName.Pass);
-                leftBtn.onClick.RemoveAllListeners();
             }
+            transform.GetChild(2).transform.gameObject.SetActive(true);
 
         });
+
+        leftBtn.onClick.RemoveAllListeners();
+        rightBtn.onClick.RemoveAllListeners();
     }
 
+    public void ResetOptionUI()
+    {
+        leftBtn.onClick.AddListener(() =>
+        {
+            ShowResultButton(leftBtn.gameObject.GetComponent<RectTransform>());
+        });
+
+        rightBtn.onClick.AddListener(() =>
+        {
+            ShowResultButton(rightBtn.gameObject.GetComponent<RectTransform>());
+        });
+        for (int i = 1; i < 3; i++)
+        {
+            leftBtn.gameObject.transform.GetChild(i).gameObject.SetActive(false);
+            rightBtn.gameObject.transform.GetChild(i).gameObject.SetActive(false);           
+        }
+    }
 }
+
 
 public enum ProgressBarName
 {

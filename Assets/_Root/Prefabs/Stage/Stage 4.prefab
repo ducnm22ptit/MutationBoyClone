@@ -375,8 +375,8 @@ MonoBehaviour:
   boyStop: {fileID: 5737220083502962376}
   wall: {fileID: 4991767485200435528}
   doorCover: {fileID: 173923280069000323}
-  optionLeft: {fileID: 2669914973916144395}
-  optionRight: {fileID: 5139356621585355471}
+  optionLeftBtn: {fileID: 2669914973916144395}
+  optionRightBtn: {fileID: 5139356621585355471}
 --- !u!1 &3801601261852534959
 GameObject:
   m_ObjectHideFlags: 0

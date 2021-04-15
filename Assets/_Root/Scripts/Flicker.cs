@@ -9,15 +9,14 @@ public class Flicker : MonoBehaviour
 
     [SerializeField] private float width;
 
-    void Start()
+
+    private void OnEnable()
     {
         for (int i = 0; i < lines.Count; i++)
         {
             ShowUp(lines[i]);
         }
     }
-
-
 
     private void ShowUp(LineRenderer lineRenderer)
     {

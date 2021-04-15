@@ -1146,8 +1146,8 @@ MonoBehaviour:
   enemyStopPosFinal: {fileID: 4991767485200435528}
   lockGate: {fileID: 3663440141490981501}
   openGate: {fileID: 7485519557201309443}
-  optionLeft: {fileID: 2669914973916144395}
-  optionRight: {fileID: 5139356621585355471}
+  optionLeftBtn: {fileID: 2669914973916144395}
+  optionRightBtn: {fileID: 5139356621585355471}
 --- !u!1 &3663440141490981501
 GameObject:
   m_ObjectHideFlags: 0

@@ -887,8 +887,8 @@ MonoBehaviour:
   jumpPos: {fileID: 1730104140524421085}
   brokeMachine: {fileID: 2512121849833657020}
   normalMachine: {fileID: 8107570148118638826}
-  optionLeft: {fileID: 2669914973916144395}
-  optionRight: {fileID: 5139356621585355471}
+  optionLeftBtn: {fileID: 2669914973916144395}
+  optionRightBtn: {fileID: 5139356621585355471}
   overlaySprite: {fileID: 5652124640483590289}
 --- !u!1 &3614583745665591648
 GameObject:

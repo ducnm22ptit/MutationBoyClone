@@ -380,8 +380,8 @@ MonoBehaviour:
   openGate: {fileID: 5059106069927213716}
   enemyStopPos: {fileID: 4718585257939082872}
   enemyBackPos: {fileID: 1282370449112902469}
-  optionLeft: {fileID: 2669914973916144395}
-  optionRight: {fileID: 5139356621585355471}
+  optionLeftBtn: {fileID: 2669914973916144395}
+  optionRightBtn: {fileID: 5139356621585355471}
 --- !u!1 &3801601261852534959
 GameObject:
   m_ObjectHideFlags: 0
