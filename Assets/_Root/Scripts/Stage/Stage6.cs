@@ -66,8 +66,8 @@ public class Stage6 : StageTwoLevel
         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
-        boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x - 6, 4f);
-        Camera.main.transform.DOMoveX(catStopPos.transform.position.x - 6, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
+        boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x - 5f, 4f);
+        Camera.main.transform.DOMoveX(catStopPos.transform.position.x - 5f, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
         {
             boyAnim.AnimationState.SetAnimation(0, "6/nga", true);
             ShowOptionUI();
@@ -87,9 +87,9 @@ public class Stage6 : StageTwoLevel
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
 
         catAnim.gameObject.SetActive(true);
-        catAnim.AnimationState.SetAnimation(0, "idle", false);
-   
-        DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
+        catAnim.AnimationState.SetAnimation(0, "idle", true);
+
+        DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             catAnim.AnimationState.SetAnimation(0, "idle flash", false);
             catAnim.AnimationState.SetAnimation(0, "walk flash", true);
@@ -104,7 +104,7 @@ public class Stage6 : StageTwoLevel
                 IntroStageSecond();
             });
         });
-        
+
 
     }
 
@@ -145,13 +145,56 @@ public class Stage6 : StageTwoLevel
     {
         optionLeftBtn.onClick.RemoveListener(Option11);
         optionRightBtn.onClick.RemoveListener(Option22);
-        Debug.Log("Option11");
+
+        smokeBienSecondFx.gameObject.transform.DOMove(spiderAnim.transform.position, 0f);
+
+        boyAnim.transform.DORotate(new Vector3(0, 360, 0), 0f, RotateMode.Fast);
+        boyAnim.AnimationState.SetAnimation(0, "jump spider", false);
+
+        boyAnim.gameObject.transform.DOMoveY(spiderAnim.gameObject.transform.position.y - 1.2f, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            smokeBienSecondFx.Play();
+            boyAnim.gameObject.SetActive(false);
+
+            SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+
+            spiderAnim.gameObject.SetActive(true);
+            spiderAnim.AnimationState.SetAnimation(0, "creep", true);
+
+            DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+            {
+                spiderAnim.gameObject.transform.DOMoveX(spiderAnim.transform.position.x - 5f, 4f).OnComplete(() =>
+                {
+                    HideOptionUI();
+                    OnPass();
+                });
+            });
+
+        });
+
     }
 
     private void Option22()
     {
         optionLeftBtn.onClick.RemoveListener(Option11);
         optionRightBtn.onClick.RemoveListener(Option22);
-        Debug.Log("Option22");
+
+        smokeBienSecondFx.Play();
+        boyAnim.gameObject.SetActive(false);
+
+        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+
+        fishAnim.SetActive(true);
+        fishAnim.transform.DOMoveX(electricFx.gameObject.transform.position.x, 1f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            electricFx.Play();
+            SoundController.Instance.PlaySoundFx(AudioClipName.Electric);
+            BeforeOnFail(NameLevel.LevelTwo);
+            DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
+            {
+                HideOptionUI();
+                OnContinue();
+            });
+        });
     }
 }

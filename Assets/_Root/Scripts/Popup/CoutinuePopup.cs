@@ -29,10 +29,12 @@ public class CoutinuePopup : MonoBehaviour
 
     private void CircleCountDown()
     {
-        circleFill.DOFillAmount(1, 3f).OnComplete(() =>
+        circleFill.DOFillAmount(1, 5f).OnComplete(() =>
         {
             GameController.Instance.PlayStageCurrent();
             GameController.Instance.PlayBackgroundMusicStart();
+            continuePopup.SetActive(false);
+            circleFill.DOFillAmount(0,0);
         });
     }
 
