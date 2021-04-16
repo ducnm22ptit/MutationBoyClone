@@ -45,24 +45,33 @@ public class Item : MonoBehaviour
 
                 itemIndex.text = (i + 1).ToString();
             }
-            else if(i == DataController.Instance.currentStage)
+            else if (i == DataController.Instance.currentStage)
             {
                 _image.sprite = spriteCurrent;
 
                 itemIndex.text = (i + 1).ToString();
             }
-        }   
+        }
         else
         {
-            _image.sprite = spriteLock;
+            if(gameController.gameConfig.canUnlockAllItem)
+            {
+                _image.sprite = spritePass;
 
-            itemIndex.gameObject.SetActive(false);
+                itemIndex.text = (i + 1).ToString();
+            }
+            else
+            {
+                _image.sprite = spriteLock;
+
+                itemIndex.gameObject.SetActive(false);
+            }        
         }
     }
 
     public void CheckStatusItem()
     {
-      if (_saveItem <= DataController.Instance.indexStage)
+        if (_saveItem <= DataController.Instance.indexStage || gameController.gameConfig.canUnlockAllItem)
          {
             DataController.Instance.currentStage = _saveItem;
 

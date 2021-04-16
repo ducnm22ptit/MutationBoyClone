@@ -8,8 +8,11 @@ using UnityEngine.UI;
 public class GameConfig : ScriptableObject
 {
     public int numberItem;
+
     public int currentItem;
 
-    public List<BaseStage> Stages = new List<BaseStage>(); 
+    public bool canUnlockAllItem;
+
+    public List<BaseStage> Stages = new List<BaseStage>();
 
 }

@@ -1563,6 +1563,7 @@ MonoBehaviour:
   - {fileID: 5189685991332022225}
   - {fileID: 3315145703903892653}
   width: 0.05
+  time: 3
 --- !u!1 &5737220083502962376
 GameObject:
   m_ObjectHideFlags: 0

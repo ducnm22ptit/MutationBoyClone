@@ -28,7 +28,7 @@ public class CompletePopup : MonoBehaviour
 
     void Start()
     {
-        
+
 
         claimBtn.onClick.AddListener(ClaimCoin);
 
@@ -38,8 +38,9 @@ public class CompletePopup : MonoBehaviour
 
         coinText.text = DataController.Instance.coinReward.ToString();
 
-      
-        DOTween.Sequence().AppendInterval(1.7f).AppendCallback(() => {
+
+        DOTween.Sequence().AppendInterval(1.7f).AppendCallback(() =>
+        {
 
             tapContinueBtn.gameObject.SetActive(true);
             tapContinueBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.7f).SetLoops(-1, LoopType.Yoyo);
@@ -56,7 +57,8 @@ public class CompletePopup : MonoBehaviour
 
     private void TapToContinue()
     {
-        DataController.Instance.indexLevel += 1;
+        DataController.Instance.currentStage += 1;
+        DataController.Instance.indexLevel = 0;
         GameController.Instance.NextStage();
         completePopup.SetActive(false);
     }
@@ -80,10 +82,10 @@ public class CompletePopup : MonoBehaviour
 
             coinText.text = ((int)x).ToString();
 
-        },DataController.Instance.coinReward
+        }, DataController.Instance.coinReward
         ,
         1f);
 
-        
+
     }
 }

@@ -19,20 +19,28 @@ public class Stage6 : StageTwoLevel
 
     [SerializeField] private GameObject boyStopPos, catStopPos, fishAnim, guns, lineRayFisrt, lineRaySecond;
 
-    [SerializeField] private Button optionLeftBtn, optionRightBtn;
-
     [SerializeField] private SpriteRenderer overlaySprite;
+
+    [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     void Start()
     {
         Camera.main.transform.DOMoveX(0, 0);
 
-        optionLeftBtn.onClick.AddListener(Option1);
+        if (DataController.Instance.indexLevel == 0)
+        {
+            optionLeftBtn.onClick.AddListener(Option1);
+            optionRightBtn.onClick.AddListener(Option2);
+            IntroStageFirst();
 
-        optionRightBtn.onClick.AddListener(Option2);
-
-
-        IntroStageFirst();
+        }
+        else if (DataController.Instance.indexLevel == 1)
+        {
+            optionLeftBtn.onClick.AddListener(Option11);
+            optionRightBtn.onClick.AddListener(Option22);
+            BeforeOnPass(NameLevel.LevelFirst);
+            IntroStageSecond();
+        }
     }
 
     private void IntroStageFirst()
@@ -56,6 +64,7 @@ public class Stage6 : StageTwoLevel
 
     private void IntroStageSecond()
     {
+        DataController.Instance.indexLevel += 1;
         overlaySprite.DOFade(0f, 2f);
         catAnim.AnimationState.SetAnimation(0, "idle", false);
         smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
@@ -71,8 +80,6 @@ public class Stage6 : StageTwoLevel
         {
             boyAnim.AnimationState.SetAnimation(0, "6/nga", true);
             ShowOptionUI();
-            optionLeftBtn.onClick.AddListener(Option11);
-            optionRightBtn.onClick.AddListener(Option22);
         });
     }
 

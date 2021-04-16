@@ -31,10 +31,11 @@ public class CoutinuePopup : MonoBehaviour
     {
         circleFill.DOFillAmount(1, 5f).OnComplete(() =>
         {
+            DataController.Instance.indexLevel = 0;
             GameController.Instance.PlayStageCurrent();
             GameController.Instance.PlayBackgroundMusicStart();
             continuePopup.SetActive(false);
-            circleFill.DOFillAmount(0,0);
+            circleFill.DOFillAmount(0, 0);
         });
     }
 
@@ -50,8 +51,11 @@ public class CoutinuePopup : MonoBehaviour
     {
         continuePopup.SetActive(false);
         GameController.Instance.PlayStageCurrent();
-        
-    }
 
+    }
+    private void OnEnable()
+    {
+        circleFill.DOKill();
+    }
 
 }

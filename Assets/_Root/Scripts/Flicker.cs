@@ -9,6 +9,8 @@ public class Flicker : MonoBehaviour
 
     [SerializeField] private float width;
 
+    [SerializeField] private float time;
+
 
     private void OnEnable()
     {
@@ -33,6 +35,6 @@ public class Flicker : MonoBehaviour
             lineRenderer.startWidth = x;
         },
         width,
-        3);
+        time);
     }
 }

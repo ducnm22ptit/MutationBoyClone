@@ -10,6 +10,8 @@ public class StageTwoLevel : BaseStage
 
     [SerializeField] private Sprite optionSecondImg;
 
+    [SerializeField] private Button optionLeftBtn, optionRightBtn;
+
     protected override void ShowOptionUI()
     {
         OptionUIController.Instance.ShowProgressBar(ProgressBarName.ProgressBarTwoLevel);
@@ -21,14 +23,12 @@ public class StageTwoLevel : BaseStage
     {
         base.HideOptionUI();
         OptionUIController.Instance.ResetOptionUI();
-        ChangeImgOptionUI();
     }
 
     protected virtual void OnContinue()
     {
         SoundController.Instance.StopAllSound();
         PopupController.Instance.ShowPopup(PopupName.ContinuePopup);
-        SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
         SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
     }
 
@@ -37,15 +37,14 @@ public class StageTwoLevel : BaseStage
         OptionUI.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().sprite = optionFirstImg;
         OptionUI.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = optionSecondImg;
     }
-
     protected virtual void BeforeOnPass(NameLevel nameLevelPass)
     {
-       
+
         if ((int)nameLevelPass == 0)
         {
             OptionUIController.Instance.ChangeColorBar(ProgressBarName.ProgressBarTwoLevel, Color.green, "Bar12");
         }
-        else if((int)nameLevelPass == 1)
+        else if ((int)nameLevelPass == 1)
         {
             OptionUIController.Instance.ChangeColorBar(ProgressBarName.ProgressBarTwoLevel, Color.green, "Bar22");
         }

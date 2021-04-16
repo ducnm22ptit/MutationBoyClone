@@ -28,7 +28,7 @@ public class HomeController : MonoBehaviour
     {
         tapToStartBtn.onClick.AddListener(NextToScene);
 
-        tapToStartBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f),0.7f).SetLoops(-1, LoopType.Yoyo);
+        tapToStartBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.7f).SetLoops(-1, LoopType.Yoyo);
 
         stageBtn.onClick.AddListener(OpenStagePopup);
 
@@ -44,11 +44,11 @@ public class HomeController : MonoBehaviour
     }
     public void NextToScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
     private void OpenStagePopup()
     {
-        stagePopup.gameObject.SetActive(true);    
+        stagePopup.gameObject.SetActive(true);
     }
     private void OpenSetting()
     {
