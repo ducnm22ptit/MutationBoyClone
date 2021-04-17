@@ -24,7 +24,7 @@ public class Stage6 : StageTwoLevel
     [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     void Start()
-    {     
+    {
         if (DataController.Instance.indexLevel == 0)
         {
             Camera.main.transform.DOMoveX(0, 0);
@@ -38,7 +38,7 @@ public class Stage6 : StageTwoLevel
             optionLeftBtn.onClick.AddListener(Option11);
             optionRightBtn.onClick.AddListener(Option22);
             ChangeImgOptionUI();
-            BeforeOnPass(NameLevel.LevelFirst);     
+            BeforeOnPass(NameLevel.LevelFirst);
             IntroStageSecond();
         }
     }
@@ -108,7 +108,7 @@ public class Stage6 : StageTwoLevel
                 smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
                 smokeBienFirstFx.Play();
                 catAnim.gameObject.SetActive(false);
-                boyAnim.gameObject.SetActive(true);              
+                boyAnim.gameObject.SetActive(true);
                 SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                 IntroStageSecond();
             });
@@ -197,6 +197,7 @@ public class Stage6 : StageTwoLevel
         fishAnim.SetActive(true);
         fishAnim.transform.DOMoveX(electricFx.gameObject.transform.position.x, 1f).SetEase(Ease.Linear).OnComplete(() =>
         {
+            fireFlyAnim.transform.DOShakePosition(1, 1, 10, 90, false, true);
             electricFx.Play();
             SoundController.Instance.PlaySoundFx(AudioClipName.Electric);
             BeforeOnFail(NameLevel.LevelTwo);

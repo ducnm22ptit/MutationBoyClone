@@ -964,5 +964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 3846035318613199805, guid: a1efafee26b45f14fab10396d1fbe3d8,
+        type: 3}
+      propertyPath: overlayImg
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1efafee26b45f14fab10396d1fbe3d8, type: 3}

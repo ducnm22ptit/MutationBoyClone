@@ -49,7 +49,6 @@ public class CompletePopup : MonoBehaviour
 
     private void BackPopup()
     {
-
         completePopup.SetActive(false);
         DataController.Instance.indexLevel = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

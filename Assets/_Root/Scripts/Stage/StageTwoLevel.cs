@@ -10,7 +10,6 @@ public class StageTwoLevel : BaseStage
 
     [SerializeField] private Sprite optionSecondImg;
 
-    [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     protected override void ShowOptionUI()
     {

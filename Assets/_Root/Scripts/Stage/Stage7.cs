@@ -71,7 +71,7 @@ public class Stage7 : StageTwoLevel
                     dinoAnim.gameObject.SetActive(false);
                     BeforeOnPass(NameLevel.LevelFirst);
                     DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
-                    {              
+                    {
                         boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
                         HideOptionUI();
                         boyAnim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -166,7 +166,6 @@ public class Stage7 : StageTwoLevel
         {
             cockRoachAnim.gameObject.transform.DOMoveX(cockRoachAnim.gameObject.transform.position.x - 5f, 3.5f).OnComplete(() =>
             {
-                DataController.Instance.indexLevel += 1;
                 HideOptionUI();
                 OnPass();
             });
