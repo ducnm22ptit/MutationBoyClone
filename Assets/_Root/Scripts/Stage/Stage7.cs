@@ -25,25 +25,20 @@ public class Stage7 : StageTwoLevel
 
     void Start()
     {
-        Camera.main.transform.DOMoveX(0, 0);
-
         if (DataController.Instance.indexLevel == 0)
         {
             optionLeftBtn.onClick.AddListener(Option1);
             optionRightBtn.onClick.AddListener(Option2);
             IntroStageFirst();
-
         }
         else if (DataController.Instance.indexLevel == 1)
         {
             optionLeftBtn.onClick.AddListener(Option11);
             optionRightBtn.onClick.AddListener(Option22);
+            ChangeImgOptionUI();
             BeforeOnPass(NameLevel.LevelFirst);
-            Debug.Log("intro2");
             IntroStageSecond();
         }
-
-
     }
 
     private void Option1()
@@ -76,13 +71,14 @@ public class Stage7 : StageTwoLevel
                     dinoAnim.gameObject.SetActive(false);
                     BeforeOnPass(NameLevel.LevelFirst);
                     DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
-                    {
-                        HideOptionUI();
+                    {              
                         boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
+                        HideOptionUI();
                         boyAnim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                         boyAnim.gameObject.transform.DOMove(boyStopPosSecond.transform.position, 1f).OnComplete(() =>
                         {
                             DataController.Instance.indexLevel += 1;
+                            boyAnim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                             IntroStageSecond();
                         });
 
@@ -124,6 +120,7 @@ public class Stage7 : StageTwoLevel
 
     private void IntroStageFirst()
     {
+        Camera.main.transform.DOMoveX(0, 0);
         Camera.main.transform.DOMoveX(boyStopPos.transform.position.x - 2f, 3f);
         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
         boyAnim.gameObject.transform.DOMoveX(boyStopPos.transform.position.x, 3f).SetEase(Ease.Linear).OnComplete(() =>
@@ -135,7 +132,6 @@ public class Stage7 : StageTwoLevel
 
     private void IntroStageSecond()
     {
-        boyAnim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         Camera.main.transform.DOMoveX(-12.98f, 0);
         boyAnim.gameObject.transform.DOMove(new Vector3(boyStopPosSecond.transform.position.x - 4f, boyStopPosSecond.transform.position.y - 0.5f, 0), 0f);
         boyAnim.AnimationState.SetAnimation(0, "creep", true);
@@ -144,6 +140,8 @@ public class Stage7 : StageTwoLevel
             boyAnim.gameObject.transform.DOMoveX(boyStopPosSecond.transform.position.x - 6.5f, 4f).OnComplete(() =>
             {
                 boyAnim.AnimationState.SetAnimation(0, "creepsmoke", true);
+                optionLeftBtn.onClick.AddListener(Option11);
+                optionRightBtn.onClick.AddListener(Option22);
                 ChangeImgOptionUI();
                 ShowOptionUI();
             });
@@ -168,6 +166,7 @@ public class Stage7 : StageTwoLevel
         {
             cockRoachAnim.gameObject.transform.DOMoveX(cockRoachAnim.gameObject.transform.position.x - 5f, 3.5f).OnComplete(() =>
             {
+                DataController.Instance.indexLevel += 1;
                 HideOptionUI();
                 OnPass();
             });

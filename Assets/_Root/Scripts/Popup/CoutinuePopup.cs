@@ -17,8 +17,7 @@ public class CoutinuePopup : MonoBehaviour
 
     [SerializeField] private Image circleFill;
 
-
-    private void Start()
+    private void OnEnable()
     {
         freeBtn.onClick.AddListener(FreeCoin);
 
@@ -34,8 +33,7 @@ public class CoutinuePopup : MonoBehaviour
             DataController.Instance.indexLevel = 0;
             GameController.Instance.PlayStageCurrent();
             GameController.Instance.PlayBackgroundMusicStart();
-            continuePopup.SetActive(false);
-            circleFill.DOFillAmount(0, 0);
+            continuePopup.SetActive(false);           
         });
     }
 
@@ -51,11 +49,11 @@ public class CoutinuePopup : MonoBehaviour
     {
         continuePopup.SetActive(false);
         GameController.Instance.PlayStageCurrent();
-
     }
-    private void OnEnable()
+
+    private void OnDisable()
     {
+        circleFill.fillAmount = 0;
         circleFill.DOKill();
     }
-
 }

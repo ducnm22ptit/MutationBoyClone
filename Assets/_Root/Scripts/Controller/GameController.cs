@@ -12,10 +12,7 @@ public class GameController : Singleton<GameController>
     void Start()
     {
         PlayBackgroundMusicStart();
-        DOTween.Sequence().AppendInterval(.3f).AppendCallback(() =>
-        {
-            PlayStageCurrent();
-        });
+        PlayStageCurrent();
     }
 
     public void PlayStageCurrent()
@@ -35,9 +32,9 @@ public class GameController : Singleton<GameController>
         {
             DataController.Instance.indexStage += 1;
         }
-
-        SoundController.Instance.StopAllSound();
+        DataController.Instance.indexLevel = 0;
         DataController.Instance.currentStage += 1;
+        SoundController.Instance.StopAllSound();
         PlayStageCurrent();
         GameController.Instance.PlayBackgroundMusicStart();
     }

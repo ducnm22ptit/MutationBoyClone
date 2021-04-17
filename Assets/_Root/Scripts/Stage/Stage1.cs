@@ -75,6 +75,7 @@ public class Stage1 : StageOneLevel
                 DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
                 {
                     Camera.main.transform.DOShakePosition(4, 1, 3, 1, false, true);
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Mountain);
                     earthQuake.Play();
                     doctorFirstAnim.AnimationState.SetAnimation(0, "worry 1", false);
                     doctorSecondAnim.AnimationState.SetAnimation(0, "worry 1", false);
@@ -88,6 +89,7 @@ public class Stage1 : StageOneLevel
                             Camera.main.transform.DOMoveX(-10.85f, 0);
                             overlaySprite.DOFade(0, 2.5f);
                             Camera.main.transform.DOShakePosition(4, 1, 3, 0.5f, false, true);
+                            SoundController.Instance.PlaySoundFx(AudioClipName.Mountain);
                             DOTween.Sequence().AppendInterval(1).AppendCallback(() =>
                             {
                                 electricFxSecond.Play();

@@ -49,15 +49,15 @@ public class CompletePopup : MonoBehaviour
 
     private void BackPopup()
     {
-        completePopup.SetActive(false);
 
+        completePopup.SetActive(false);
+        DataController.Instance.indexLevel = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
     }
 
     private void TapToContinue()
     {
-        DataController.Instance.currentStage += 1;
         DataController.Instance.indexLevel = 0;
         GameController.Instance.NextStage();
         completePopup.SetActive(false);

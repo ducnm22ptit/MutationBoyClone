@@ -24,21 +24,21 @@ public class Stage6 : StageTwoLevel
     [SerializeField] private Button optionLeftBtn, optionRightBtn;
 
     void Start()
-    {
-        Camera.main.transform.DOMoveX(0, 0);
-
+    {     
         if (DataController.Instance.indexLevel == 0)
         {
+            Camera.main.transform.DOMoveX(0, 0);
             optionLeftBtn.onClick.AddListener(Option1);
             optionRightBtn.onClick.AddListener(Option2);
             IntroStageFirst();
-
         }
         else if (DataController.Instance.indexLevel == 1)
         {
+            Camera.main.transform.DOMoveX(catStopPos.transform.position.x, 0f);
             optionLeftBtn.onClick.AddListener(Option11);
             optionRightBtn.onClick.AddListener(Option22);
-            BeforeOnPass(NameLevel.LevelFirst);
+            ChangeImgOptionUI();
+            BeforeOnPass(NameLevel.LevelFirst);     
             IntroStageSecond();
         }
     }
@@ -64,21 +64,14 @@ public class Stage6 : StageTwoLevel
 
     private void IntroStageSecond()
     {
-        DataController.Instance.indexLevel += 1;
-        overlaySprite.DOFade(0f, 2f);
-        catAnim.AnimationState.SetAnimation(0, "idle", false);
-        smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
-        smokeBienFirstFx.Play();
-        catAnim.gameObject.SetActive(false);
         boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
-        boyAnim.gameObject.SetActive(true);
         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
-        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
-
         boyAnim.gameObject.transform.DOMoveX(catStopPos.transform.position.x - 5f, 4f);
         Camera.main.transform.DOMoveX(catStopPos.transform.position.x - 5f, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
         {
             boyAnim.AnimationState.SetAnimation(0, "6/nga", true);
+            optionLeftBtn.onClick.AddListener(Option11);
+            optionRightBtn.onClick.AddListener(Option22);
             ShowOptionUI();
         });
     }
@@ -107,7 +100,16 @@ public class Stage6 : StageTwoLevel
         {
             Camera.main.transform.DOMoveX(catStopPos.transform.position.x, 2.5f).OnComplete(() =>
             {
+                DataController.Instance.indexLevel += 1;
                 HideOptionUI();
+                ChangeImgOptionUI();
+                overlaySprite.DOFade(0f, 2f);
+                catAnim.AnimationState.SetAnimation(0, "idle", false);// dung chay
+                smokeBienFirstFx.gameObject.transform.DOMoveX(catStopPos.transform.position.x, 0f);
+                smokeBienFirstFx.Play();
+                catAnim.gameObject.SetActive(false);
+                boyAnim.gameObject.SetActive(true);              
+                SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                 IntroStageSecond();
             });
         });
@@ -170,6 +172,7 @@ public class Stage6 : StageTwoLevel
 
             DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
             {
+                BeforeOnPass(NameLevel.LevelTwo);
                 spiderAnim.gameObject.transform.DOMoveX(spiderAnim.transform.position.x - 5f, 4f).OnComplete(() =>
                 {
                     HideOptionUI();
