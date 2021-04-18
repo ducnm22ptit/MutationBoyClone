@@ -600,7 +600,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+  - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -651,11 +651,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: creep
   loop: 0
@@ -740,7 +738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4307740389390461240}
   m_LocalRotation: {x: -0.13379528, y: 0.991009, z: -0, w: 0}
-  m_LocalPosition: {x: 21.17, y: -11.8, z: 0}
+  m_LocalPosition: {x: 21.17, y: -11.32, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 8}
   m_Children: []
   m_Father: {fileID: 7145886802726250601}
@@ -986,7 +984,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 632c8604d0e29f340bcc7e00b5e61543, type: 2}
+  - {fileID: 2100000, guid: af5fbaefef590fc41b6cb782f8ccd359, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1037,11 +1035,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: af5fbaefef590fc41b6cb782f8ccd359, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: 632c8604d0e29f340bcc7e00b5e61543, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: animation
   loop: 1

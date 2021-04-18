@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 
 public class GameController : Singleton<GameController>
 {
     public GameConfig gameConfig;
+
     private BaseStage _currentStage;
 
     void Start()
@@ -24,7 +24,6 @@ public class GameController : Singleton<GameController>
 
         _currentStage = Instantiate(gameConfig.Stages[DataController.Instance.currentStage]);
     }
-
 
     public void NextStage()
     {
@@ -45,4 +44,6 @@ public class GameController : Singleton<GameController>
 
         SoundController.Instance.ContinueBackgroundMusic();
     }
+
+
 }

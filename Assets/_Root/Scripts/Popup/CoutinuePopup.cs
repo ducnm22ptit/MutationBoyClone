@@ -56,6 +56,7 @@ public class CoutinuePopup : MonoBehaviour
         DataController.Instance.indexLevel = _i;
         minusCoinBtn.gameObject.SetActive(false);
         continuePopup.SetActive(false);
+        GameController.Instance.PlayBackgroundMusicStart();
         GameController.Instance.PlayStageCurrent();
     }
 
@@ -63,6 +64,7 @@ public class CoutinuePopup : MonoBehaviour
     {
         DataController.Instance.indexLevel = _i;
         continuePopup.SetActive(false);
+        GameController.Instance.PlayBackgroundMusicStart();
         GameController.Instance.PlayStageCurrent();
     }
 
