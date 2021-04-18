@@ -40,8 +40,6 @@ public class OptionUIController : Singleton<OptionUIController>
         {
             ShowResultButton(rightBtn.gameObject.GetComponent<RectTransform>());
         });
-
-
     }
 
     private void SwapOption(RectTransform left, RectTransform right)
@@ -87,7 +85,7 @@ public class OptionUIController : Singleton<OptionUIController>
             transform.GetChild(1).transform.gameObject.SetActive(true);
         }
 
-        DOTween.Sequence().AppendInterval(2.5f).AppendCallback(() =>
+        DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
         {
             if (transform.GetChild(2).transform.name == "Result" && transform.name == "Option2")
             {
@@ -119,7 +117,7 @@ public class OptionUIController : Singleton<OptionUIController>
         for (int i = 1; i < 3; i++)
         {
             leftBtn.gameObject.transform.GetChild(i).gameObject.SetActive(false);
-            rightBtn.gameObject.transform.GetChild(i).gameObject.SetActive(false);           
+            rightBtn.gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 }
