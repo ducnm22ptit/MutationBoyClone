@@ -43,15 +43,18 @@ public class HomeController : MonoBehaviour
         levelText.text = ("Level " + (DataController.Instance.indexStage + 1).ToString());
     }
     public void NextToScene()
-    {
+    {   SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
+        DataController.Instance.indexLevel  = 0;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
     private void OpenStagePopup()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         stagePopup.gameObject.SetActive(true);
     }
     private void OpenSetting()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         settingPopup.gameObject.SetActive(true);
     }
 }

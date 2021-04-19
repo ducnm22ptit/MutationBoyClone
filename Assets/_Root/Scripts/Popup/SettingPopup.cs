@@ -41,6 +41,7 @@ public class SettingPopup : MonoBehaviour
 
     private void ClosePopup()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         settingPopup.gameObject.SetActive(false);
     }
     private void EnableSound()
@@ -64,6 +65,7 @@ public class SettingPopup : MonoBehaviour
     }
     private void ToggleSound()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         if (DataController.Instance.isSound == true)
         {
             DisableSound();
@@ -90,6 +92,7 @@ public class SettingPopup : MonoBehaviour
     }
     private void ToggleMusic()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         if (DataController.Instance.isMusic == true)
         {
             DisableMusic();

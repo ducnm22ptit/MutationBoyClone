@@ -73,7 +73,11 @@ public class Item : MonoBehaviour
     {
         if (_saveItem <= DataController.Instance.indexStage || gameController.gameConfig.canUnlockAllItem)
          {
+            SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
+
             DataController.Instance.currentStage = _saveItem;
+
+            DataController.Instance.indexLevel  = 0;
 
             gameController.PlayStageCurrent();
 

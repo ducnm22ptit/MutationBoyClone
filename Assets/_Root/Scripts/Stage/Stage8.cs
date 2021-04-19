@@ -120,26 +120,27 @@ public class Stage8 : StageTwoLevel
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             spiderWeb.SetActive(true);
-            spiderAnim.gameObject.SetActive(false);
-            spiderSecondAnim.gameObject.SetActive(true);
-            BeforeOnPass(NameLevel.LevelTwo);
-            DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
-            {
-                fanWindFx.Pause();
-                fanAnim.gameObject.SetActive(false);
-                fanOffAnim.gameObject.SetActive(true);
-                spiderSecondAnim.gameObject.SetActive(false);
-                smokeBienSecondFx.Play();
-                SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
-                boyAnim.AnimationState.SetAnimation(0, "0/run", true);
-                SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
-                boyAnim.gameObject.SetActive(true);
-                boyAnim.gameObject.transform.DOMoveX(boyStopPosThird.transform.position.x + 12f, 3f).OnComplete(() =>
+            DOTween.Sequence().AppendInterval(1f).AppendCallback(() => {
+                spiderAnim.gameObject.SetActive(false);
+                spiderSecondAnim.gameObject.SetActive(true);
+                BeforeOnPass(NameLevel.LevelTwo);
+                DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
                 {
-                    HideOptionUI();
-                    OnPass();
+                    fanWindFx.Pause();
+                    fanAnim.gameObject.SetActive(false);
+                    fanOffAnim.gameObject.SetActive(true);
+                    spiderSecondAnim.gameObject.SetActive(false);
+                    smokeBienSecondFx.Play();
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+                    boyAnim.AnimationState.SetAnimation(0, "0/run", true);
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
+                    boyAnim.gameObject.SetActive(true);
+                    boyAnim.gameObject.transform.DOMoveX(boyStopPosThird.transform.position.x + 12f, 3f).OnComplete(() =>
+                    {
+                        HideOptionUI();
+                        OnPass();
+                    });
                 });
-
             });
         });
     }

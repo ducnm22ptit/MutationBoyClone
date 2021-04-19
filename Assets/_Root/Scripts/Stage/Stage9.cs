@@ -27,6 +27,8 @@ public class Stage9 : StageThreeLevel
 
     void Start()
     {
+        Debug.Log(DataController.Instance.indexLevel);
+
         if (DataController.Instance.indexLevel == 0)
         {
             optionLeftBtn.onClick.AddListener(Option1);
@@ -46,6 +48,7 @@ public class Stage9 : StageThreeLevel
             optionLeftBtn.onClick.AddListener(Option111);
             optionRightBtn.onClick.AddListener(Option222);
             ChangeImgTwoTimeOptionUI();
+            BeforeOnPass(NameThreeLevel.LevelFirst);
             BeforeOnPass(NameThreeLevel.LevelSecond);
             IntroStageThird();
         }
@@ -68,11 +71,11 @@ public class Stage9 : StageThreeLevel
         machineShark.transform.DOMoveY(machineShark.transform.position.y - 4f, 4f).OnComplete(() =>
         {
             smokeBienFirstFx.gameObject.transform.DOScale(2, 0f);
-            HideOptionUI();
-            DataController.Instance.indexLevel += 1;
+            HideOptionUI();          
         });
         Camera.main.transform.DOMove(new Vector3(11, 0, -10f), 4f).OnComplete(() =>
          {
+             DataController.Instance.indexLevel += 1;
              IntroStageSecond();
          });
 
@@ -152,14 +155,15 @@ public class Stage9 : StageThreeLevel
                             ChangeImgTwoTimeOptionUI();
                             HideOptionUI();
                             smokeBienSecondFx.Play();
+                            SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                             mantisAnim.gameObject.SetActive(false);
                             boyAnim.gameObject.SetActive(true);
                             boyAnim.AnimationState.SetAnimation(0, "0/run", true);
                             Camera.main.transform.DOMoveX(18.5f, 3.5f);
+                            DataController.Instance.indexLevel += 1;
                             boyAnim.gameObject.transform.DOMove(secondStopPos.transform.position, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
                             {
-                                DataController.Instance.indexLevel += 1;
-                                IntroStageThird();
+                              IntroStageThird();
                             });
                         });
                     });
@@ -182,6 +186,7 @@ public class Stage9 : StageThreeLevel
         DOTween.Sequence().AppendInterval(0.4f).AppendCallback(() =>
         {
             electricFx.Play();
+            SoundController.Instance.PlaySoundFx(AudioClipName.Electric);
             securityFisrtAnim.AnimationState.SetAnimation(0, "electric", false);
             securitySecondAnim.AnimationState.SetAnimation(0, "Electric", false);
             securityThirdAnim.AnimationState.SetAnimation(0, "Electric", false);
@@ -208,20 +213,23 @@ public class Stage9 : StageThreeLevel
         dinoAnim.AnimationState.SetAnimation(0, "idle", true);
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
+            SoundController.Instance.PlaySoundFx(AudioClipName.Dino1);
             dinoAnim.AnimationState.SetAnimation(0, "stamp", true);
             Camera.main.transform.DOShakePosition(2, 1, 3, 1, false, true);
             BeforeOnPass(NameThreeLevel.LevelThird);
             DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
             {
+                SoundController.Instance.PlaySoundFx(AudioClipName.EarthQuake);
                 columnFirst.GetComponent<Rigidbody2D>().AddForce(transform.right * 100);
                 columnSecond.GetComponent<Rigidbody2D>().AddForce(transform.right * 100);
                 listLazer.SetActive(false);
                 dinoAnim.AnimationState.SetAnimation(0, "idle", true);
                 mokeyAnim.AnimationState.SetAnimation(0, "turn", true);
                 catAnim.AnimationState.SetAnimation(0, "run", true);
-                DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
+                DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
                 {
                     smokeBienFourFx.Play();
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                     dinoAnim.gameObject.SetActive(false);
                     boyAnim.gameObject.SetActive(true);
                     boyAnim.AnimationState.SetAnimation(0, "0/run", true);
@@ -247,9 +255,11 @@ public class Stage9 : StageThreeLevel
         gorillaAnim.AnimationState.SetAnimation(0, "idle", true);
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
+            BeforeOnFail(NameThreeLevel.LevelThird);
             gorillaAnim.AnimationState.SetAnimation(0, "Hit", false);
             DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
             {
+                SoundController.Instance.PlaySoundFx(AudioClipName.Electric);
                 electricSecondFx.Play();
                 gorillaAnim.AnimationState.SetAnimation(0, "electric", true);
                 DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
@@ -286,6 +296,7 @@ public class Stage9 : StageThreeLevel
         Camera.main.transform.DOMove(new Vector3(11, 0, -10f), 0f);
         whaleAnim.gameObject.SetActive(false);
         smokeBienSecondFx.Play();
+        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
         boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
         boyAnim.gameObject.SetActive(true);
         boyAnim.gameObject.transform.DOMove(mantisAnim.gameObject.transform.position, 0f);
@@ -308,6 +319,7 @@ public class Stage9 : StageThreeLevel
     private void IntroStageThird()
     {
         Camera.main.transform.DOMoveX(18.5f, 0f);
+        boyAnim.gameObject.transform.DOMove(secondStopPos.transform.position, 0f);
         mokeyAnim.AnimationState.SetAnimation(0, "bi duoi", true);
         catAnim.AnimationState.SetAnimation(0, "afraid", true);
         boyAnim.AnimationState.SetAnimation(0, "level9", true);
