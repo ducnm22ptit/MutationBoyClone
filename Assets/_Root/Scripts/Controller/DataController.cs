@@ -68,7 +68,7 @@ public class DataController : Singleton<DataController>
     {
         get
         {
-            return PlayerPrefs.GetInt(INDEX_LEVEL+ "-" + currentStage, 0);
+            return PlayerPrefs.GetInt(INDEX_LEVEL + "-" + currentStage, 0);
         }
         set
         {

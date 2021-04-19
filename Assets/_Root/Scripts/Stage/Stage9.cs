@@ -27,30 +27,24 @@ public class Stage9 : StageThreeLevel
 
     void Start()
     {
-        Debug.Log(DataController.Instance.indexLevel);
-
         if (DataController.Instance.indexLevel == 0)
         {
+            IntroStageFirst();
             optionLeftBtn.onClick.AddListener(Option1);
             optionRightBtn.onClick.AddListener(Option2);
-            IntroStageFirst();
         }
         else if (DataController.Instance.indexLevel == 1)
         {
-            optionLeftBtn.onClick.AddListener(Option11);
-            optionRightBtn.onClick.AddListener(Option22);
+            IntroStageSecond();
             ChangeImgOptionUI();
             BeforeOnPass(NameThreeLevel.LevelFirst);
-            IntroStageSecond();
         }
         else if (DataController.Instance.indexLevel == 2)
         {
-            optionLeftBtn.onClick.AddListener(Option111);
-            optionRightBtn.onClick.AddListener(Option222);
+            IntroStageThird();
             ChangeImgTwoTimeOptionUI();
             BeforeOnPass(NameThreeLevel.LevelFirst);
             BeforeOnPass(NameThreeLevel.LevelSecond);
-            IntroStageThird();
         }
 
     }
@@ -71,14 +65,13 @@ public class Stage9 : StageThreeLevel
         machineShark.transform.DOMoveY(machineShark.transform.position.y - 4f, 4f).OnComplete(() =>
         {
             smokeBienFirstFx.gameObject.transform.DOScale(2, 0f);
-            HideOptionUI();          
+            HideOptionUI();
         });
         Camera.main.transform.DOMove(new Vector3(11, 0, -10f), 4f).OnComplete(() =>
          {
              DataController.Instance.indexLevel += 1;
              IntroStageSecond();
          });
-
     }
 
     private void Option2()
@@ -118,6 +111,7 @@ public class Stage9 : StageThreeLevel
 
     private void Option11()
     {
+        DataController.Instance.indexLevel += 1;
         optionLeftBtn.onClick.RemoveListener(Option11);
         optionRightBtn.onClick.RemoveListener(Option22);
 
@@ -152,6 +146,7 @@ public class Stage9 : StageThreeLevel
                         boyAnim.gameObject.transform.DOMove(mantisAnim.transform.position, 0f);
                         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
                         {
+
                             ChangeImgTwoTimeOptionUI();
                             HideOptionUI();
                             smokeBienSecondFx.Play();
@@ -160,10 +155,10 @@ public class Stage9 : StageThreeLevel
                             boyAnim.gameObject.SetActive(true);
                             boyAnim.AnimationState.SetAnimation(0, "0/run", true);
                             Camera.main.transform.DOMoveX(18.5f, 3.5f);
-                            DataController.Instance.indexLevel += 1;
+
                             boyAnim.gameObject.transform.DOMove(secondStopPos.transform.position, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
                             {
-                              IntroStageThird();
+                                IntroStageThird();
                             });
                         });
                     });

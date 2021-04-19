@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameController : Singleton<GameController>
 {
@@ -9,14 +10,21 @@ public class GameController : Singleton<GameController>
 
     private BaseStage _currentStage;
 
+    [SerializeField] Button replayBtn;
+
+
     void Start()
     {
+        replayBtn.onClick.AddListener(ReplayGame);
+
         PlayBackgroundMusicStart();
         PlayStageCurrent();
     }
 
     public void PlayStageCurrent()
     {
+        replayBtn.gameObject.SetActive(true);
+
         if (_currentStage != null)
         {
             DestroyImmediate(_currentStage.gameObject, true);
@@ -31,13 +39,18 @@ public class GameController : Singleton<GameController>
         {
             DataController.Instance.indexStage += 1;
         }
-        DataController.Instance.indexLevel = 0;
         DataController.Instance.currentStage += 1;
         SoundController.Instance.StopAllSound();
+        DataController.Instance.indexLevel = 0;
         PlayStageCurrent();
         GameController.Instance.PlayBackgroundMusicStart();
     }
-
+    private void ReplayGame()
+    {
+        DOTween.KillAll(false);
+        DataController.Instance.indexLevel = 0;
+        PlayStageCurrent();
+    }
     public void PlayBackgroundMusicStart()
     {
         SoundController.Instance.SetBackgroundMusic(AudioClipName.InGameBackground);

@@ -70,6 +70,7 @@ public class Stage8 : StageTwoLevel
                 backGroundSecond.SetActive(false);
                 boyAnim.gameObject.transform.DOMove(boyStopPosThird.transform.position, 2f).SetEase(Ease.Linear).OnComplete(() =>
                 {
+                    Debug.Log("stage 8, " + DataController.Instance.currentStage + ", " + DataController.Instance.indexLevel);
                     DataController.Instance.indexLevel += 1;
                     IntroStageSecond();
                 });
@@ -120,7 +121,8 @@ public class Stage8 : StageTwoLevel
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             spiderWeb.SetActive(true);
-            DOTween.Sequence().AppendInterval(1f).AppendCallback(() => {
+            DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+            {
                 spiderAnim.gameObject.SetActive(false);
                 spiderSecondAnim.gameObject.SetActive(true);
                 BeforeOnPass(NameLevel.LevelTwo);

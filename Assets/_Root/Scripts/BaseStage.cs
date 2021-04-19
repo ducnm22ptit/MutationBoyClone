@@ -14,6 +14,11 @@ public class BaseStage : MonoBehaviour
         PopupController.Instance.ShowPopup(PopupName.CompletePopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.WinPopupAdd);
+        if (DataController.Instance.currentStage == DataController.Instance.indexStage)
+        {
+            DataController.Instance.indexStage += 1;
+        }
+        DataController.Instance.currentStage += 1;
     }
 
     protected virtual void OnFail()

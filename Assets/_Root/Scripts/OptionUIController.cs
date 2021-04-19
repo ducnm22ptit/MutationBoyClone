@@ -13,9 +13,6 @@ public class OptionUIController : Singleton<OptionUIController>
 
     [SerializeField] private TextMeshProUGUI textTo, textFrom;
 
-
-
-
     private void OnEnable()
     {
         var a = Random.Range(1, 50);
@@ -30,6 +27,7 @@ public class OptionUIController : Singleton<OptionUIController>
 
     private void Start()
     {
+
 
         leftBtn.onClick.AddListener(() =>
         {
@@ -50,6 +48,7 @@ public class OptionUIController : Singleton<OptionUIController>
 
         right.localPosition = tmp;
     }
+
 
     public void ShowProgressBar(ProgressBarName progressBarName)
     {

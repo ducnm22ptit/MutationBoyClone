@@ -102,7 +102,6 @@ public class Stage2 : StageOneLevel
             });
 
         });
-
     }
 
     private void Option1()

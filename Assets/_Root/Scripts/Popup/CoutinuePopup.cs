@@ -18,10 +18,10 @@ public class CoutinuePopup : MonoBehaviour
     [SerializeField] private Image circleFill;
 
     private int _i;
+
     private void OnEnable()
     {
         _i = DataController.Instance.indexLevel;
-        
         minusCoinBtn.gameObject.SetActive(true);
         if (DataController.Instance.coinReward < 200)
         {
@@ -46,24 +46,20 @@ public class CoutinuePopup : MonoBehaviour
 
     private void MinusingCoin()
     {
-        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
-        if (DataController.Instance.coinReward > 200)
+        if (DataController.Instance.coinReward >= 200)
         {
             DataController.Instance.coinReward -= 200;
         }
         DataController.Instance.indexLevel = _i;
         minusCoinBtn.gameObject.SetActive(false);
         continuePopup.SetActive(false);
-        GameController.Instance.PlayBackgroundMusicStart();
         GameController.Instance.PlayStageCurrent();
     }
 
     private void FreeCoin()
     {
-        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         DataController.Instance.indexLevel = _i;
         continuePopup.SetActive(false);
-        GameController.Instance.PlayBackgroundMusicStart();
         GameController.Instance.PlayStageCurrent();
     }
 
