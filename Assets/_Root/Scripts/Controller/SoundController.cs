@@ -29,6 +29,10 @@ public class SoundController : Singleton<SoundController>
     {
         audioSourceBg.Pause();
     }
+    public void PauseSoundFx()
+    {
+        audioSource.Pause();
+    }
 
     public void StopAllSound()
     {
@@ -39,7 +43,7 @@ public class SoundController : Singleton<SoundController>
     {
 
         if (DataController.Instance.isMusic && DataController.Instance.isSound)
-        { 
+        {
             audioSourceBg.Play();
         }
     }

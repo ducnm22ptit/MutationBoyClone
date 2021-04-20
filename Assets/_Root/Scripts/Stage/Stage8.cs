@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
@@ -24,7 +24,6 @@ public class Stage8 : StageTwoLevel
 
     void Start()
     {
-        Debug.Log(DataController.Instance.indexLevel);
         if (DataController.Instance.indexLevel == 0)
         {
             optionLeftBtn.onClick.AddListener(Option1);
@@ -70,7 +69,6 @@ public class Stage8 : StageTwoLevel
                 backGroundSecond.SetActive(false);
                 boyAnim.gameObject.transform.DOMove(boyStopPosThird.transform.position, 2f).SetEase(Ease.Linear).OnComplete(() =>
                 {
-                    Debug.Log("stage 8, " + DataController.Instance.currentStage + ", " + DataController.Instance.indexLevel);
                     DataController.Instance.indexLevel += 1;
                     IntroStageSecond();
                 });

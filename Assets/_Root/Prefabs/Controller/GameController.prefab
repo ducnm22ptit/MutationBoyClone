@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: 24e62c9bb9fd74c4f9eff04f5dcc89a0, type: 2}
+  replayBtn: {fileID: 6148181589159659084, guid: 7e605d5d9bd454e4b9e002341d7e1231,
+    type: 3}

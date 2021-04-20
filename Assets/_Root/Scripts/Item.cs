@@ -54,7 +54,7 @@ public class Item : MonoBehaviour
         }
         else
         {
-            if(gameController.gameConfig.canUnlockAllItem)
+            if (gameController.gameConfig.canUnlockAllItem)
             {
                 _image.sprite = spritePass;
 
@@ -65,24 +65,24 @@ public class Item : MonoBehaviour
                 _image.sprite = spriteLock;
 
                 itemIndex.gameObject.SetActive(false);
-            }        
+            }
         }
     }
 
     public void CheckStatusItem()
     {
         if (_saveItem <= DataController.Instance.indexStage || gameController.gameConfig.canUnlockAllItem)
-         {
+        {
             SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
 
             DataController.Instance.currentStage = _saveItem;
 
-            DataController.Instance.indexLevel  = 0;
+            DataController.Instance.indexLevel = 0;
 
             gameController.PlayStageCurrent();
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-         }
+        }
     }
 
 }
