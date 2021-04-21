@@ -195,7 +195,7 @@ public class Stage10 : StageThreeLevel
             monkeyAnim.AnimationState.SetAnimation(0, "turn", false);
             monkeyAnim.gameObject.transform.DOMoveX(netObject.gameObject.transform.position.x, 1f);
             robotSecondAnim.AnimationState.SetAnimation(0, "shoot", false);
-            DOTween.Sequence().AppendInterval(0.4f).AppendCallback(() =>
+            DOTween.Sequence().AppendInterval(0.7f).AppendCallback(() =>
             {
                 BeforeOnFail(NameThreeLevel.LevelSecond);
                 netObject.gameObject.SetActive(true);

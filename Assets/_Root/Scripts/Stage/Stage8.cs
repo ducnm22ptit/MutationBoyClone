@@ -119,7 +119,7 @@ public class Stage8 : StageTwoLevel
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             spiderWeb.SetActive(true);
-            DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+            spiderAnim.gameObject.transform.DOMove(spiderSecondAnim.gameObject.transform.position, 0.5f).OnComplete(() =>
             {
                 spiderAnim.gameObject.SetActive(false);
                 spiderSecondAnim.gameObject.SetActive(true);
@@ -155,13 +155,16 @@ public class Stage8 : StageTwoLevel
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
         elephantSecondAnim.gameObject.SetActive(true);
         elephantSecondAnim.AnimationState.SetAnimation(0, "jam", true);
-        backGroundSecond.SetActive(true);
-        BeforeOnFail(NameLevel.LevelTwo);
-        DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
-           {
-               HideOptionUI();
-               OnContinue();
-           });
+        DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
+        {
+            backGroundSecond.SetActive(true);
+            BeforeOnFail(NameLevel.LevelTwo);
+            DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
+               {
+                   HideOptionUI();
+                   OnContinue();
+               });
+        });
     }
 
     private void IntroStageFirst()
