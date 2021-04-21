@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e192d32d18197df4e8aab07b56f01f01, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  canUnlockAllItem: 1
+  canUnlockAllItem: 0
   Stages:
   - {fileID: 2846154823073383289, guid: 543c32288cec73643b65f0562ba31e45, type: 3}
   - {fileID: 1313878152322965460, guid: d6d1ec51db3a462439c200779c8e4901, type: 3}
@@ -24,13 +24,3 @@ MonoBehaviour:
   - {fileID: -2422231529534382227, guid: aa6bfcfea16e29e498f3319f4edfe6aa, type: 3}
   - {fileID: 1488888026176530269, guid: dd32a8c7a737c8e4b9ee75c14de96e8e, type: 3}
   - {fileID: 5316937485374091586, guid: dd350d756856c554ea23842178eecba6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

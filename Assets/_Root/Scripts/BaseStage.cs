@@ -18,7 +18,6 @@ public class BaseStage : MonoBehaviour
         {
             DataController.Instance.indexStage += 1;
         }
-        DataController.Instance.currentStage += 1;
     }
 
     protected virtual void OnFail()

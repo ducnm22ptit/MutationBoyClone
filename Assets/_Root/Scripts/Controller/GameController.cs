@@ -30,7 +30,11 @@ public class GameController : Singleton<GameController>
             DestroyImmediate(_currentStage.gameObject, true);
         }
 
+        Debug.Log(DataController.Instance.currentStage);
+
         _currentStage = Instantiate(gameConfig.Stages[DataController.Instance.currentStage]);
+
+
     }
 
     public void NextStage()
@@ -39,6 +43,7 @@ public class GameController : Singleton<GameController>
         {
             DataController.Instance.indexStage += 1;
         }
+        Debug.Log("NextStage " + DataController.Instance.currentStage);
         DataController.Instance.currentStage += 1;
         SoundController.Instance.StopAllSound();
         DataController.Instance.indexLevel = 0;

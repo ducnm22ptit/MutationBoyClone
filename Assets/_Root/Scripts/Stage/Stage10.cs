@@ -13,13 +13,13 @@ public class Stage10 : StageThreeLevel
 
     [SerializeField] private SkeletonAnimation robotFisrtAnim, robotSecondAnim;
 
-    [SerializeField] private SkeletonAnimation monkeyAnim, eelAnim, moleAnim, dinoAnim;
+    [SerializeField] private SkeletonAnimation monkeyAnim, eelAnim, moleAnim, dinoAnim, thunderDinoAnim;
 
     [SerializeField] private SkeletonAnimation doctorAnim;
 
-    [SerializeField] private ParticleSystem smokeBienFirstFx, smokeBienSecondFx, smokeBienThirdFx, dirtyGroundFx;
+    [SerializeField] private ParticleSystem smokeBienFirstFx, smokeBienSecondFx, smokeBienThirdFx, smokeBienFourthFx, dirtyGroundFx, eplosionFireFx;
 
-    [SerializeField] private GameObject boyStopPos, secondStopPos, wallEscape, netObject, rocketObject, robotSquad;
+    [SerializeField] private GameObject boyStopPos, secondStopPos, wallEscape, netObject, rocketObject, robotSquad, holeObject, wallObject, brokenWallObject, brokenBg, Bg;
 
     [SerializeField] private Button optionLeftBtn, optionRightBtn;
     void Start()
@@ -72,6 +72,7 @@ public class Stage10 : StageThreeLevel
                     boyAnim.gameObject.SetActive(true);
                     boyAnim.AnimationState.SetAnimation(0, "0/run", true);
                     SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
+                    DataController.Instance.indexLevel += 1;
                     HideOptionUI();
                     IntroStageSecond();
                 });
@@ -163,7 +164,8 @@ public class Stage10 : StageThreeLevel
                                  {
                                      netObject.gameObject.SetActive(false);
                                      boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
-                                     boyAnim.gameObject.transform.DORotate(new Vector3(0, 0, 0), 0f, RotateMode.FastBeyond360);
+                                     boyAnim.gameObject.transform.DOLocalRotate(new Vector3(0, 360f, 0), 0f, RotateMode.FastBeyond360);
+                                     DataController.Instance.indexLevel += 1;
                                      HideOptionUI();
                                      ChangeImgTwoTimeOptionUI();
                                      IntroStageThird();
@@ -186,21 +188,103 @@ public class Stage10 : StageThreeLevel
         boyAnim.gameObject.SetActive(false);
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
         monkeyAnim.gameObject.SetActive(true);
-        monkeyAnim.AnimationState.SetAnimation(0, "idle2", true);
+        monkeyAnim.AnimationState.SetAnimation(0, "idle", true);
+        DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+        {
+            robotFisrtAnim.AnimationState.SetAnimation(0, "idle2", false);
+            monkeyAnim.AnimationState.SetAnimation(0, "turn", false);
+            monkeyAnim.gameObject.transform.DOMoveX(netObject.gameObject.transform.position.x, 1f);
+            robotSecondAnim.AnimationState.SetAnimation(0, "shoot", false);
+            DOTween.Sequence().AppendInterval(0.4f).AppendCallback(() =>
+            {
+                BeforeOnFail(NameThreeLevel.LevelSecond);
+                netObject.gameObject.SetActive(true);
+                netObject.transform.DOMoveY(netObject.transform.position.y - 1.2f, 0.5f).OnComplete(() =>
+                {
+                    monkeyAnim.AnimationState.SetAnimation(0, "die", false);
+                    DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+                    {
+                        HideOptionUI();
+                        OnContinue();
+                    });
+                });
 
+            });
+        });
     }
     private void Option111()
     {
         optionLeftBtn.onClick.RemoveListener(Option111);
         optionRightBtn.onClick.RemoveListener(Option222);
 
+        smokeBienFirstFx.Play();
+        boyAnim.gameObject.SetActive(false);
+        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+        moleAnim.gameObject.SetActive(true);
+        holeObject.SetActive(true);
+        moleAnim.gameObject.transform.DOMoveY(moleAnim.gameObject.transform.position.y - 3, 2f);
+        dirtyGroundFx.Play();
+        DOTween.Sequence().AppendInterval(0.7f).AppendCallback(() =>
+        {
+            BeforeOnPass(NameThreeLevel.LevelThird);
+            eplosionFireFx.Play();
+            wallObject.SetActive(false);
+            Bg.SetActive(false);
+            brokenBg.SetActive(true);
+            brokenWallObject.SetActive(true);
+            rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 6f, 1f).OnComplete(() =>
+            {
+                rocketObject.SetActive(false);
+                moleAnim.gameObject.transform.DOMoveY(moleAnim.gameObject.transform.position.y + 3f, 1.3f).OnComplete(() =>
+                {
+                    smokeBienThirdFx.Play();
+                    boyAnim.gameObject.transform.DORotate(new Vector3(0, 360, 0), 0f);
+                    boyAnim.gameObject.SetActive(true);
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+                    moleAnim.gameObject.SetActive(false);
+                    boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
+                    Camera.main.transform.DOMoveX(thunderDinoAnim.transform.position.x + 5, 3f);
+                    boyAnim.gameObject.transform.DOMove(thunderDinoAnim.transform.position, 0.6f).SetEase(Ease.Linear).OnComplete(() =>
+                     {
+                         smokeBienFourthFx.Play();
+                         boyAnim.gameObject.SetActive(false);
+                         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+                         thunderDinoAnim.gameObject.SetActive(true);
+                         thunderDinoAnim.AnimationState.SetAnimation(0, "idle", true);
+                         thunderDinoAnim.gameObject.transform.DOMoveX(thunderDinoAnim.gameObject.transform.position.x + 5f, 1.5f).OnComplete(() =>
+                         {
+                             HideOptionUI();
+                             SoundController.Instance.PauseSoundFx();
+                             OnPass();
+                         });
 
+
+                     });
+
+                });
+            });
+        });
     }
 
     private void Option222()
     {
+        SoundController.Instance.PlaySoundFx(AudioClipName.WallFall);
         optionLeftBtn.onClick.RemoveListener(Option111);
         optionRightBtn.onClick.RemoveListener(Option222);
+        smokeBienThirdFx.Play();
+        SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
+        SoundController.Instance.PlaySoundFx(AudioClipName.Dino1);
+        boyAnim.gameObject.SetActive(false);
+        dinoAnim.gameObject.SetActive(true);
+        dinoAnim.AnimationState.SetAnimation(0, "idle", true);
+        BeforeOnFail(NameThreeLevel.LevelThird);
+        rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 0.6f, 0.5f).OnComplete(() =>
+        {
+            rocketObject.SetActive(false);
+            dinoAnim.AnimationState.SetAnimation(0, "die", false);
+            HideOptionUI();
+            OnContinue();
+        });
 
 
     }
@@ -213,49 +297,59 @@ public class Stage10 : StageThreeLevel
         Camera.main.transform.DOMoveX(boyStopPos.transform.position.x, 2f);
         doctorAnim.AnimationState.SetAnimation(0, "idlemachine", true);
         boyAnim.gameObject.transform.DOMoveX(boyStopPos.transform.position.x, 2f).SetEase(Ease.Linear).OnComplete(() =>
-        {
-            boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
-            ShowOptionUI();
-        });
+            {
+                boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+                ShowOptionUI();
+            });
     }
     private void IntroStageSecond()
     {
         Camera.main.transform.DOMove(new Vector3(10.3f, 0, -10f), 0f);
-        Camera.main.transform.DOMoveX(boyAnim.transform.position.x + 2f, 2f);
+        boyAnim.gameObject.transform.DOMoveX(boyStopPos.transform.position.x, 0f);
+        boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+        Camera.main.transform.DOMoveX(boyStopPos.transform.position.x + 2f, 2f);
+        doctorAnim.gameObject.SetActive(false);
         SoundController.Instance.PlaySoundFx(AudioClipName.Robot);
         robotFisrtAnim.AnimationState.SetAnimation(0, "walk", true);
         robotSecondAnim.AnimationState.SetAnimation(0, "walk", true);
-        robotSquad.transform.DOMoveX(boyAnim.transform.position.x + 1.8f, 2f).OnComplete(() =>
-        {
-            boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
-            robotFisrtAnim.AnimationState.SetAnimation(0, "idle", true);
-            robotSecondAnim.AnimationState.SetAnimation(0, "idle", true);
-            ChangeImgOptionUI();
-            ShowOptionUI();
-            optionLeftBtn.onClick.AddListener(Option11);
-            optionRightBtn.onClick.AddListener(Option22);
-        });
+        robotSquad.transform.DOMoveX(boyStopPos.transform.position.x + 1.8f, 2f).OnComplete(() =>
+            {
+                boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+                robotFisrtAnim.AnimationState.SetAnimation(0, "idle", true);
+                robotSecondAnim.AnimationState.SetAnimation(0, "idle", true);
+                ChangeImgOptionUI();
+                ShowOptionUI();
+                optionLeftBtn.onClick.AddListener(Option11);
+                optionRightBtn.onClick.AddListener(Option22);
+            });
 
 
     }
 
     private void IntroStageThird()
     {
-        Camera.main.transform.DOMoveX(Camera.main.transform.position.x - 7f, 0f);
+        Camera.main.transform.DOMoveX(Camera.main.transform.position.x - 7f, 0f).SetEase(Ease.Linear);
+        robotSquad.transform.DOMoveX(boyStopPos.transform.position.x + 1.8f, 0f);
+        boyAnim.gameObject.transform.DOMoveX(smokeBienThirdFx.transform.position.x, 0f);
+        boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
+        boyAnim.gameObject.SetActive(true);
+        boyAnim.gameObject.transform.DOLocalRotate(new Vector3(0, 360f, 0), 0f, RotateMode.FastBeyond360);
         robotSecondAnim.gameObject.transform.DORotate(new Vector3(0, 180, 0), 0f);
         robotSecondAnim.AnimationState.SetAnimation(0, "shoot", false);
         DOTween.Sequence().AppendInterval(0.6f).AppendCallback(() =>
-        {
-            rocketObject.SetActive(true);
-            SoundController.Instance.PlaySoundFx(AudioClipName.WallFall);
-            rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 4f, 2f).OnComplete(() =>
             {
-                SoundController.Instance.PauseSoundFx();
+                rocketObject.SetActive(true);
+                SoundController.Instance.PlaySoundFx(AudioClipName.WallFall);
+                rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 4f, 2f).OnComplete(() =>
+                {
+                    SoundController.Instance.PauseSoundFx();
+                });
             });
-        });
         Camera.main.transform.DOMove(new Vector3(16.39f, 0, -10f), 3.6f).SetEase(Ease.Linear).OnComplete(() =>
         {
             ShowOptionUI();
+            optionLeftBtn.onClick.AddListener(Option111);
+            optionRightBtn.onClick.AddListener(Option222);
         });
     }
 }
