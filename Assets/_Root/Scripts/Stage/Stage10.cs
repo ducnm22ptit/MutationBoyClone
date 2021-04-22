@@ -232,7 +232,7 @@ public class Stage10 : StageThreeLevel
             Bg.SetActive(false);
             brokenBg.SetActive(true);
             brokenWallObject.SetActive(true);
-            rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 6f, 1f).OnComplete(() =>
+            rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 6f, 0.6f).OnComplete(() =>
             {
                 rocketObject.SetActive(false);
                 moleAnim.gameObject.transform.DOMoveY(moleAnim.gameObject.transform.position.y + 3f, 1.3f).OnComplete(() =>
@@ -242,8 +242,8 @@ public class Stage10 : StageThreeLevel
                     boyAnim.gameObject.SetActive(true);
                     SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
                     moleAnim.gameObject.SetActive(false);
-                    boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
                     Camera.main.transform.DOMoveX(thunderDinoAnim.transform.position.x + 5, 3f);
+                    boyAnim.AnimationState.SetAnimation(0, "0/jump", false);
                     boyAnim.gameObject.transform.DOMove(thunderDinoAnim.transform.position, 0.6f).SetEase(Ease.Linear).OnComplete(() =>
                      {
                          smokeBienFourthFx.Play();

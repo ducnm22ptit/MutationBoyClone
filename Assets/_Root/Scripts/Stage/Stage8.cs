@@ -127,6 +127,7 @@ public class Stage8 : StageTwoLevel
                 DOTween.Sequence().AppendInterval(1.5f).AppendCallback(() =>
                 {
                     fanWindFx.Pause();
+                    fanWindFx.gameObject.SetActive(false);
                     fanAnim.gameObject.SetActive(false);
                     fanOffAnim.gameObject.SetActive(true);
                     spiderSecondAnim.gameObject.SetActive(false);

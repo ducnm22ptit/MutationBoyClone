@@ -798,7 +798,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+  - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -849,11 +849,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: a2a2e528c3922094f8429573504e9ca8, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: a87ef5f7609de47c6be04efa9cf081f6, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: 0/run
   loop: 0
@@ -2402,7 +2400,7 @@ PrefabInstance:
     - target: {fileID: 2040204592420374803, guid: 6992edbbeb8f67d439d67c314da34ba8,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2040204592420483251, guid: 6992edbbeb8f67d439d67c314da34ba8,
         type: 3}
@@ -2417,7 +2415,7 @@ PrefabInstance:
     - target: {fileID: 2040204592439388626, guid: 6992edbbeb8f67d439d67c314da34ba8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.66
+      value: 10.01
       objectReference: {fileID: 0}
     - target: {fileID: 2040204592439388626, guid: 6992edbbeb8f67d439d67c314da34ba8,
         type: 3}
