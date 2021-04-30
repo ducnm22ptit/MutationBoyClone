@@ -39,6 +39,7 @@ public class Stage5 : StageOneLevel
         {
             lockGate.SetActive(false);
             openGate.SetActive(true);
+            SoundController.Instance.PlaySoundFx(AudioClipName.Door);
             DOTween.Sequence().AppendInterval(0.2f).AppendCallback(() =>
             {
                 securityFirstAnim.AnimationState.SetAnimation(0, "run", true);

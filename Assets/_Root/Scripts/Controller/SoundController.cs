@@ -31,12 +31,23 @@ public class SoundController : Singleton<SoundController>
     }
     public void PauseSoundFx()
     {
+        audioSource.loop = false;
         audioSource.Pause();
     }
-
+    public void LoopSoundFx(AudioClipName audioClipName)
+    {
+         audioSource.clip = audioClips[(int)audioClipName];
+         audioSource.loop = true;
+         audioSource.Play();
+    }
     public void StopAllSound()
     {
         audioSourceBg.Stop();
+    }
+
+    public void StopSoundFx()
+    {
+        audioSource.Stop();
     }
 
     public void ContinueBackgroundMusic()

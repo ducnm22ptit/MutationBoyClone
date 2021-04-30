@@ -75,7 +75,6 @@ public class Item : MonoBehaviour
         {
             SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
 
-            Debug.Log("CheckStatusItem: " + DataController.Instance.currentStage);
             DataController.Instance.currentStage = _saveItem;
 
             DataController.Instance.indexLevel = 0;

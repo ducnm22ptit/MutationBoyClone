@@ -132,6 +132,7 @@ public class Stage2 : StageOneLevel
 
                     lockGate.SetActive(false);
                     openGate.SetActive(true);
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Door);
                     HideOptionUI();
                     securityFirst.gameObject.transform.DOMoveX(enemyStopPosFinal.transform.position.x, 3f).SetEase(Ease.Linear);
                     securitySecond.gameObject.transform.DOMoveX(enemyStopPosFinal.transform.position.x, 4f).SetEase(Ease.Linear);

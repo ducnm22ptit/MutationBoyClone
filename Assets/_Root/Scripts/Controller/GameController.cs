@@ -17,7 +17,6 @@ public class GameController : Singleton<GameController>
     void Start()
     {
         replayBtn.onClick.AddListener(ReplayGame);
-
         PlayBackgroundMusicStart();
         PlayStageCurrent();
     }
@@ -30,11 +29,7 @@ public class GameController : Singleton<GameController>
             DestroyImmediate(_currentStage.gameObject, true);
         }
 
-        Debug.Log(DataController.Instance.currentStage);
-
         _currentStage = Instantiate(gameConfig.Stages[DataController.Instance.currentStage]);
-
-
     }
 
     public void NextStage()
@@ -42,9 +37,9 @@ public class GameController : Singleton<GameController>
         if (DataController.Instance.currentStage == DataController.Instance.indexStage)
         {
             DataController.Instance.indexStage += 1;
-        }
-        Debug.Log("NextStage " + DataController.Instance.currentStage);
+        }        
         DataController.Instance.currentStage += 1;
+        SoundController.Instance.StopSoundFx();
         SoundController.Instance.StopAllSound();
         DataController.Instance.indexLevel = 0;
         PlayStageCurrent();
@@ -52,6 +47,7 @@ public class GameController : Singleton<GameController>
     }
     private void ReplayGame()
     {
+        SoundController.Instance.StopSoundFx();
         DOTween.KillAll(false);
         DataController.Instance.indexLevel = 0;
         PlayStageCurrent();

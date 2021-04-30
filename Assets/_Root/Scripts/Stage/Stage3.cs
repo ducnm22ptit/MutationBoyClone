@@ -90,7 +90,7 @@ public class Stage3 : StageOneLevel
             DOTween.Sequence().AppendInterval(1.3f).AppendCallback(() =>
             {
                 hideDoor.GetComponent<Rigidbody2D>().gravityScale = 1;
-
+                SoundController.Instance.PlaySoundFx(AudioClipName.Door);
                 BeforeOnPass();
             }).OnComplete(() =>
             {

@@ -130,6 +130,7 @@ public class Stage8 : StageTwoLevel
                     fanWindFx.gameObject.SetActive(false);
                     fanAnim.gameObject.SetActive(false);
                     fanOffAnim.gameObject.SetActive(true);
+                    SoundController.Instance.StopSoundFx();
                     spiderSecondAnim.gameObject.SetActive(false);
                     smokeBienSecondFx.Play();
                     SoundController.Instance.PlaySoundFx(AudioClipName.Trans);

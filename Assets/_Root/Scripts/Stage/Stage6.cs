@@ -135,6 +135,7 @@ public class Stage6 : StageTwoLevel
         {
             lineRayFisrt.SetActive(true);
             lineRaySecond.SetActive(true);
+            SoundController.Instance.PlaySoundFx(AudioClipName.Laser);
             DOTween.Sequence().AppendInterval(0.3f).AppendCallback(() =>
             {
                 fireFlyAnim.AnimationState.SetAnimation(0, "die", true);

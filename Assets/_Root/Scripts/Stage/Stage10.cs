@@ -254,7 +254,6 @@ public class Stage10 : StageThreeLevel
                          thunderDinoAnim.gameObject.transform.DOMoveX(thunderDinoAnim.gameObject.transform.position.x + 5f, 1.5f).OnComplete(() =>
                          {
                              HideOptionUI();
-                             SoundController.Instance.PauseSoundFx();
                              OnPass();
                          });
 

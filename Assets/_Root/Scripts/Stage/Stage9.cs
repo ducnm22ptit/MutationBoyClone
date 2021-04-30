@@ -61,7 +61,7 @@ public class Stage9 : StageThreeLevel
         whaleAnim.AnimationState.SetAnimation(0, "idle2", true);
         waterFirstFx.Play();
         waterSecondFx.Play();
-
+        SoundController.Instance.PlaySoundFx(AudioClipName.Whale);
         machineShark.transform.DOMoveY(machineShark.transform.position.y - 4f, 4f).OnComplete(() =>
         {
             smokeBienFirstFx.gameObject.transform.DOScale(2, 0f);
@@ -132,14 +132,16 @@ public class Stage9 : StageThreeLevel
                 securityThirdAnim.AnimationState.SetAnimation(0, "afraid", false);
                 DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
                 {
+                    SoundController.Instance.LoopSoundFx(AudioClipName.Karate);
                     mantisAnim.AnimationState.SetAnimation(0, "hit2", false);
                     mantisAnim.AnimationState.SetAnimation(0, "hit3", false);
                     securitySecondAnim.AnimationState.SetAnimation(0, "die", false);
                     mantisAnim.AnimationState.SetAnimation(0, "hit4", false);
-                    mantisAnim.AnimationState.SetAnimation(0, "hit5", false);
+                    mantisAnim.AnimationState.SetAnimation(0, "hit5", false);       
                     securityThirdAnim.AnimationState.SetAnimation(0, "die", false);
                     DOTween.Sequence().AppendInterval(0.6f).AppendCallback(() =>
                     {
+                        SoundController.Instance.PauseAllSound();
                         BeforeOnPass(NameThreeLevel.LevelSecond);
                         mantisAnim.AnimationState.SetAnimation(0, "idle2", true);
                         smokeBienSecondFx.gameObject.transform.DOMove(mantisAnim.transform.position, 0f);
@@ -248,6 +250,7 @@ public class Stage9 : StageThreeLevel
         SoundController.Instance.PlaySoundFx(AudioClipName.Trans);
         gorillaAnim.gameObject.SetActive(true);
         gorillaAnim.AnimationState.SetAnimation(0, "idle", true);
+        SoundController.Instance.PlaySoundFx(AudioClipName.Gorilla);
         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
         {
             BeforeOnFail(NameThreeLevel.LevelThird);
