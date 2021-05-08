@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e192d32d18197df4e8aab07b56f01f01, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  canUnlockAllItem: 0
+  canUnlockAllItem: 1
   Stages:
   - {fileID: 2846154823073383289, guid: 543c32288cec73643b65f0562ba31e45, type: 3}
   - {fileID: 1313878152322965460, guid: d6d1ec51db3a462439c200779c8e4901, type: 3}
