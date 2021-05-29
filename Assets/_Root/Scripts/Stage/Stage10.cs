@@ -341,7 +341,7 @@ public class Stage10 : StageThreeLevel
                 SoundController.Instance.PlaySoundFx(AudioClipName.WallFall);
                 rocketObject.transform.DOMoveX(rocketObject.transform.position.x + 4f, 2f).OnComplete(() =>
                 {
-                    SoundController.Instance.PauseSoundFx();
+                    SoundController.Instance.PauseSoundFx(AudioClipName.WallFall);
                 });
             });
         Camera.main.transform.DOMove(new Vector3(16.39f, 0, -10f), 3.6f).SetEase(Ease.Linear).OnComplete(() =>

@@ -30,7 +30,7 @@ public class StageThreeLevel : BaseStage
 
     protected virtual void OnContinue()
     {
-        SoundController.Instance.StopAllSound();
+        SoundController.Instance.StopSoundFx();
         PopupController.Instance.ShowPopup(PopupName.ContinuePopup);
         SoundController.Instance.PlaySoundFx(AudioClipName.GameOver);
     }

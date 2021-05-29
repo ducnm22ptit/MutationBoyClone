@@ -35,7 +35,6 @@ public class BaseStage : MonoBehaviour
     protected virtual void ShowOptionUI()
     {
         OptionUI.SetActive(true);
-
     }
 
 

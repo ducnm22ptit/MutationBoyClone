@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e192d32d18197df4e8aab07b56f01f01, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  canUnlockAllItem: 1
+  canUnlockAllItem: 0
   Stages:
   - {fileID: 2846154823073383289, guid: 543c32288cec73643b65f0562ba31e45, type: 3}
   - {fileID: 1313878152322965460, guid: d6d1ec51db3a462439c200779c8e4901, type: 3}
@@ -24,3 +24,13 @@ MonoBehaviour:
   - {fileID: -2422231529534382227, guid: aa6bfcfea16e29e498f3319f4edfe6aa, type: 3}
   - {fileID: 1488888026176530269, guid: dd32a8c7a737c8e4b9ee75c14de96e8e, type: 3}
   - {fileID: 5316937485374091586, guid: dd350d756856c554ea23842178eecba6, type: 3}
+  - {fileID: 2096997563843125697, guid: 565f1362525d9c74fa601e913e333d1d, type: 3}
+  - {fileID: 7544165381260170596, guid: 5e3a11c324dff78469c2d7f36bd6a9da, type: 3}
+  - {fileID: 2103960860951461578, guid: 78809d807e3c8b449b7fd367d7d74eaa, type: 3}
+  - {fileID: 4788721561640339643, guid: e0b72484fd3ff9d4f928abe015000906, type: 3}
+  - {fileID: 939485864626793775, guid: 082d4d1cc49686b48a0c6ac9714c7159, type: 3}
+  - {fileID: 637734332086172507, guid: 896da56f2fea35d42aec64a1bf5b9905, type: 3}
+  - {fileID: 3341286493382550028, guid: f6d212c9ff312ca4eb8e331ba5de1d6c, type: 3}
+  - {fileID: 4330042868223183905, guid: bfdff77c136feb146a51498e195baebb, type: 3}
+  - {fileID: 5619932295332085322, guid: 07bd7880d78087f4fbd65be8a39ac5a1, type: 3}
+  - {fileID: 1149227581429362398, guid: a52ab274e8567944c9163d0459424803, type: 3}

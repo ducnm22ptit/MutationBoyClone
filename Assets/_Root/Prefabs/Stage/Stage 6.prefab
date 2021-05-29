@@ -342,6 +342,7 @@ MonoBehaviour:
   lines:
   - {fileID: 6801347540743966371}
   width: 0.05
+  time: 0
 --- !u!1 &2517181668199357167
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,9 +478,9 @@ MonoBehaviour:
   guns: {fileID: 3982977564129733049}
   lineRayFisrt: {fileID: 8354473966252008793}
   lineRaySecond: {fileID: 2077658189689315474}
+  overlaySprite: {fileID: 8904121231794271165}
   optionLeftBtn: {fileID: 2669914973916144395}
   optionRightBtn: {fileID: 5139356621585355471}
-  overlaySprite: {fileID: 8904121231794271165}
 --- !u!1 &3428112945504395476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,6 +1850,7 @@ MonoBehaviour:
   lines:
   - {fileID: 2562351681567997314}
   width: 0.05
+  time: 0
 --- !u!1001 &1828633658120070340
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -132,23 +132,21 @@ public class Stage9 : StageThreeLevel
                 securityThirdAnim.AnimationState.SetAnimation(0, "afraid", false);
                 DOTween.Sequence().AppendInterval(0.5f).AppendCallback(() =>
                 {
-                    SoundController.Instance.LoopSoundFx(AudioClipName.Karate);
+                    SoundController.Instance.PlaySoundFx(AudioClipName.Karate);
                     mantisAnim.AnimationState.SetAnimation(0, "hit2", false);
                     mantisAnim.AnimationState.SetAnimation(0, "hit3", false);
                     securitySecondAnim.AnimationState.SetAnimation(0, "die", false);
                     mantisAnim.AnimationState.SetAnimation(0, "hit4", false);
-                    mantisAnim.AnimationState.SetAnimation(0, "hit5", false);       
+                    mantisAnim.AnimationState.SetAnimation(0, "hit5", false);
                     securityThirdAnim.AnimationState.SetAnimation(0, "die", false);
                     DOTween.Sequence().AppendInterval(0.6f).AppendCallback(() =>
                     {
-                        SoundController.Instance.PauseAllSound();
                         BeforeOnPass(NameThreeLevel.LevelSecond);
                         mantisAnim.AnimationState.SetAnimation(0, "idle2", true);
                         smokeBienSecondFx.gameObject.transform.DOMove(mantisAnim.transform.position, 0f);
                         boyAnim.gameObject.transform.DOMove(mantisAnim.transform.position, 0f);
                         DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
                         {
-
                             ChangeImgTwoTimeOptionUI();
                             HideOptionUI();
                             smokeBienSecondFx.Play();

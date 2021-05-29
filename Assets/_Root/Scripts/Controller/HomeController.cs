@@ -21,7 +21,6 @@ public class HomeController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI levelText;
 
-    [SerializeField] private GameController gameController;
 
 
     private void Start()
@@ -43,8 +42,9 @@ public class HomeController : MonoBehaviour
         levelText.text = ("Level " + (DataController.Instance.indexStage + 1).ToString());
     }
     public void NextToScene()
-    {   SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
-        DataController.Instance.indexLevel  = 0;
+    {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
+        DataController.Instance.indexLevel = 0;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
     private void OpenStagePopup()

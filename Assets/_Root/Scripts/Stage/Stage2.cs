@@ -221,10 +221,6 @@ public class Stage2 : StageOneLevel
 
             });
         });
-
-
-
-
     }
 
 }

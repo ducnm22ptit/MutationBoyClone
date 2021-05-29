@@ -18,8 +18,6 @@ public class Item : MonoBehaviour
 
     [SerializeField] private Sprite spriteLock;
 
-    [SerializeField] private HomeController homeController;
-
     [SerializeField] private GameController gameController;
 
     private int _saveItem;
