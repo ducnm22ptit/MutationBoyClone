@@ -4,29 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Spine.Unity;
+using Spine.Unity.Editor;
 using TMPro;
 
 
-public class HomeController : MonoBehaviour
+public class HomeController : Singleton<HomeController>
 {
-    [SerializeField] private Button tapToStartBtn;
+    [SerializeField] Button tapToStartBtn;
 
-    [SerializeField] private Button stageBtn;
+    [SerializeField] Button stageBtn;
 
-    [SerializeField] private Button settingBtn;
+    [SerializeField] Button settingBtn;
 
-    [SerializeField] private Button shopBtn;
+    [SerializeField] Button shopBtn;
 
-    [SerializeField] private GameObject stagePopup, settingPopup, storePopup;
+    [SerializeField] GameObject stagePopup, settingPopup, storePopup;
 
-    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] TextMeshProUGUI coinText;
 
-    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI levelText;
 
+    [SerializeField] ShopConfig _shopConfig;
+
+    [SerializeField] SkeletonGraphic _character;
 
 
     private void Start()
     {
+        LoadSkinCharacter();
+
         tapToStartBtn.onClick.AddListener(NextToScene);
 
         tapToStartBtn.gameObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.7f).SetLoops(-1, LoopType.Yoyo);
@@ -45,6 +52,36 @@ public class HomeController : MonoBehaviour
 
         levelText.text = ("Level " + (DataController.Instance.indexStage + 1).ToString());
     }
+
+    public void LoadSkinCharacter()
+    {
+        _character.skeletonDataAsset = _shopConfig.CharacterInShopList[DataController.Instance.IDSkinCurrent].Character_Skin;
+        SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(_character);
+        switch (DataController.Instance.IDSkinCurrent)
+        {
+            case 0:
+                _character.AnimationState.SetAnimation(0, "0/walk", true);
+                _character.transform.DORotate(new Vector3(0,0,0), 0f);
+                break;
+            case 1:
+                _character.AnimationState.SetAnimation(0, "1/run", true);
+                _character.transform.DORotate(new Vector3(0,180,0),0f);
+                break;
+            case 2:
+                _character.AnimationState.SetAnimation(0, "0/run", true);
+                _character.transform.DORotate(new Vector3(0, 0, 0), 0f);
+                break;
+            case 3:
+                _character.AnimationState.SetAnimation(0, "walk", true);
+                _character.transform.DORotate(new Vector3(0, 0, 0), 0f);
+                break;
+            case 4:
+                _character.AnimationState.SetAnimation(0, "walk", true); 
+                _character.transform.DORotate(new Vector3(0, 180, 0), 0f);
+                break;
+        }
+    }
+
     public void NextToScene()
     {
         SoundController.Instance.PlaySoundFx(AudioClipName.Touch);

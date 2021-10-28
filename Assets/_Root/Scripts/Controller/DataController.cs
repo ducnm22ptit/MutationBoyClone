@@ -16,7 +16,9 @@ public class DataController : Singleton<DataController>
 
     private const string COIN_REWARD = "COIN_REWARD";
 
-    private const string CURRENT_SKIN = "CURRENT_SKIN";
+    private const string ID_CHARACTER = "ID_CHARACTER";
+
+    private const string ID_SKIN_CURRENT = "ID_SKIN_CURRENT";
 
     private const string IS_PURCHASE = "IS_PURCHASE";
 
@@ -84,7 +86,7 @@ public class DataController : Singleton<DataController>
     {
         get
         {
-            return PlayerPrefs.GetFloat(COIN_REWARD, 0);
+            return PlayerPrefs.GetFloat(COIN_REWARD, 1000);
         }
         set
         {
@@ -92,16 +94,16 @@ public class DataController : Singleton<DataController>
         }
     }
 
-    public int ID_SKin
+    public int ID_Character
     {
         get
         {
-            return PlayerPrefs.GetInt(CURRENT_SKIN, -1);
+            return PlayerPrefs.GetInt(ID_CHARACTER, 0);
         }
 
         set
         {
-            PlayerPrefs.SetInt(CURRENT_SKIN, value);
+            PlayerPrefs.SetInt(ID_CHARACTER, value);
         }
     }
 
@@ -109,12 +111,25 @@ public class DataController : Singleton<DataController>
     {
         get
         {
-            return bool.Parse(PlayerPrefs.GetString(ID_SKin +"-"+ IS_PURCHASE, "false"));
+            return bool.Parse(PlayerPrefs.GetString(ID_Character + "-"+ IS_PURCHASE, "false"));
         }
 
         set
         {
-            PlayerPrefs.SetString(ID_SKin + "-" + IS_PURCHASE, value.ToString());
+            PlayerPrefs.SetString(ID_Character + "-" + IS_PURCHASE, value.ToString());
+        }
+    }
+
+    public int IDSkinCurrent
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(ID_SKIN_CURRENT, 0);
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt(ID_SKIN_CURRENT, value);
         }
     }
 }

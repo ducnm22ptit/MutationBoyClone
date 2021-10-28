@@ -8,11 +8,13 @@ using TMPro;
 
 public class StoreItem : MonoBehaviour
 {
-    [SerializeField] Button CoinBtn;
+    [SerializeField] TextMeshProUGUI _animName;
 
-    [SerializeField] SkeletonGraphic skinAnim;
+    [SerializeField] Button _useBtn, _animPriceObj;
 
-    private GameObject _coinObj;
+    [SerializeField] SkeletonGraphic _anim;
+
+    [SerializeField] GameObject _coinObj;
 
     private int _ID;
 
@@ -22,83 +24,106 @@ public class StoreItem : MonoBehaviour
 
     private string _name;
 
+    private int _indexDefault;
 
     private void Start()
     {
-        CoinBtn.onClick.AddListener(PurchaseSkin);
+        _indexDefault = 0;
         _coinObj = FindObjectOfType<CoinController>().gameObject;
+        _animPriceObj.onClick.AddListener(PurchaseCharacter);
+        _useBtn.onClick.AddListener(UseCharacter);
     }
 
-    public void SetSkinStatus(int index, string skinName, string skinPrice, SkeletonDataAsset skinType)
+    public void SetCharacterInShop(int index, string characterName, SkeletonDataAsset characterSkin, string characterPrice)
     {
-        this._ID = index;
-        this._name = skinName;
-        this._price = skinPrice;
-        this._skin = skinType;
+        if(index == _indexDefault)
+        {
+            DataController.Instance.IsPurchse = true;
+        }
+        else
+        {
+            this._price = characterPrice;
+            _animPriceObj.GetComponentInChildren<TextMeshProUGUI>().text = this._price;      
+        }
 
-        this.gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = this._name;
-        this.gameObject.transform.GetChild(1).GetComponentInChildren<SkeletonGraphic>().skeletonDataAsset = this._skin;
-        SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(this.gameObject.transform.GetChild(1).GetComponentInChildren<SkeletonGraphic>());
-        this.gameObject.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = this._price;
+        this._ID = index;
+        this._name = characterName;
+        this._skin = characterSkin;
+
+        _animName.text = this._name;
+        _anim.skeletonDataAsset = this._skin;
+        SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(_anim);
 
         ShowStatus();
     }
     private void ShowStatus()
     {
-        DataController.Instance.ID_SKin = this._ID;
+        DataController.Instance.ID_Character = this._ID; // get ID for checking data "true" or "false"
 
         if (DataController.Instance.IsPurchse == true)
         {
-            CoinBtn.gameObject.SetActive(false);
-            skinAnim.color = Color.white;
+            _animPriceObj.gameObject.SetActive(false);
+            _useBtn.gameObject.SetActive(true);
+            _anim.color = Color.white;
             switch (_ID)
             {
                 case 0:
-                    skinAnim.AnimationState.SetAnimation(0, "1/idle", true);
+                    _anim.AnimationState.SetAnimation(0, "0/walk", true);
                     break;
                 case 1:
-                    skinAnim.AnimationState.SetAnimation(0, "0/idle", true);
+                    _anim.AnimationState.SetAnimation(0, "1/idle", true);
+                    break;
+                case 2:
+                    _anim.AnimationState.SetAnimation(0, "0/idle", true);
                     break;
                 default:
-                    skinAnim.AnimationState.SetAnimation(0, "idle", true);
+                    _anim.AnimationState.SetAnimation(0, "idle", true);
                     break;
             }
         }
 
         else
         {
-            skinAnim.color = Color.black;
+            _anim.color = Color.black;
         }
     }
 
-    private void PurchaseSkin()
+    private void PurchaseCharacter()
     {
         SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
 
         if (DataController.Instance.coinReward >= float.Parse(_price))
         {
-            DataController.Instance.ID_SKin = this._ID;
+            DataController.Instance.ID_Character = this._ID;
             DataController.Instance.IsPurchse = true;
-            CoinBtn.gameObject.SetActive(false);      
+            _animPriceObj.gameObject.SetActive(false);
+            _useBtn.gameObject.SetActive(true);
             float coinValue = float.Parse(_coinObj.GetComponentInChildren<TextMeshProUGUI>().text);
             coinValue -= float.Parse(_price);
             _coinObj.GetComponentInChildren<TextMeshProUGUI>().text = coinValue.ToString();
             DataController.Instance.coinReward -= float.Parse(_price);
 
-            skinAnim.color = Color.white; 
+            _anim.color = Color.white; 
 
             switch (_ID)
             {
-                case 0:
-                    skinAnim.AnimationState.SetAnimation(0, "1/idle", true);
-                    break;
                 case 1:
-                    skinAnim.AnimationState.SetAnimation(0, "0/idle", true);
+                    _anim.AnimationState.SetAnimation(0, "1/idle", true);
+                    break;
+                case 2:
+                    _anim.AnimationState.SetAnimation(0, "0/idle", true);
                     break;
                 default:
-                    skinAnim.AnimationState.SetAnimation(0, "idle", true);
+                    _anim.AnimationState.SetAnimation(0, "idle", true);
                     break;
             }
         }
+    }
+
+    private void UseCharacter()
+    {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
+        DataController.Instance.IDSkinCurrent = this._ID;
+        HomeController.Instance.LoadSkinCharacter();
     }
 }

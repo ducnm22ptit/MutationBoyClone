@@ -5,38 +5,36 @@ using UnityEngine.UI;
 
 public class StorePopup : MonoBehaviour
 {
-    [SerializeField] GameObject Container;
+    [SerializeField] GameObject _container;
 
-    [SerializeField] SkinConfig SkinConfig;
+    [SerializeField] ShopConfig _shopConfig;
 
-    [SerializeField] StoreItem ItemStorePrefab;
+    [SerializeField] StoreItem _itemStorePrefab;
 
-    [SerializeField] Button BackBtn;
-
-    [SerializeField] GameObject StorePopupObj;
+    [SerializeField] Button _backBtn;
 
 
     private void Start()
     {
-        BackBtn.onClick.AddListener(BackToHome);
-        GenerateSkin();
+        _backBtn.onClick.AddListener(BackToHome);
+        GenerateCharacterInShop();
     }
 
-    private void GenerateSkin()
+    private void GenerateCharacterInShop()
     {
-        for (int i = 0; i < SkinConfig.SkinList.Count; i++)
+        for (int i = 0; i < _shopConfig.CharacterInShopList.Count; i++)
         {
-            StoreItem item = Instantiate(ItemStorePrefab, Container.transform);
-            var type = SkinConfig.SkinList[i].Skin_Type;
-            var price = SkinConfig.SkinList[i].Skin_Price;
-            var name = SkinConfig.SkinList[i].Skin_Name;
-            item.SetSkinStatus(i, name, price, type);
+            StoreItem item = Instantiate(_itemStorePrefab, _container.transform);
+            var name = _shopConfig.CharacterInShopList[i].Character_Name;
+            var skin = _shopConfig.CharacterInShopList[i].Character_Skin;
+            var price = _shopConfig.CharacterInShopList[i].Character_Price;
+            item.SetCharacterInShop(i, name, skin, price);
         }
     }
 
     private void BackToHome()
     {
         SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
-        StorePopupObj.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
