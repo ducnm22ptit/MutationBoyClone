@@ -15,7 +15,9 @@ public class HomeController : MonoBehaviour
 
     [SerializeField] private Button settingBtn;
 
-    [SerializeField] private GameObject stagePopup, settingPopup;
+    [SerializeField] private Button shopBtn;
+
+    [SerializeField] private GameObject stagePopup, settingPopup, storePopup;
 
     [SerializeField] private TextMeshProUGUI coinText;
 
@@ -32,6 +34,8 @@ public class HomeController : MonoBehaviour
         stageBtn.onClick.AddListener(OpenStagePopup);
 
         settingBtn.onClick.AddListener(OpenSetting);
+
+        shopBtn.onClick.AddListener(OpenStore);
 
         SoundController.Instance.SetBackgroundMusic(AudioClipName.UIBackground);
 
@@ -56,5 +60,11 @@ public class HomeController : MonoBehaviour
     {
         SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         settingPopup.gameObject.SetActive(true);
+    }
+
+    private void OpenStore()
+    {
+        SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
+        storePopup.gameObject.SetActive(true);
     }
 }

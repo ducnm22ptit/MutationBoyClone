@@ -16,6 +16,10 @@ public class DataController : Singleton<DataController>
 
     private const string COIN_REWARD = "COIN_REWARD";
 
+    private const string CURRENT_SKIN = "CURRENT_SKIN";
+
+    private const string IS_PURCHASE = "IS_PURCHASE";
+
     public bool isSound
     {
         get
@@ -88,5 +92,30 @@ public class DataController : Singleton<DataController>
         }
     }
 
+    public int ID_SKin
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(CURRENT_SKIN, -1);
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt(CURRENT_SKIN, value);
+        }
+    }
+
+    public bool IsPurchse
+    {
+        get
+        {
+            return bool.Parse(PlayerPrefs.GetString(ID_SKin +"-"+ IS_PURCHASE, "false"));
+        }
+
+        set
+        {
+            PlayerPrefs.SetString(ID_SKin + "-" + IS_PURCHASE, value.ToString());
+        }
+    }
 }
 

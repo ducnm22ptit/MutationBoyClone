@@ -33,7 +33,7 @@ public class ItemPopup : MonoBehaviour
     }
 
     private void BackToHome()
-    {
+    { 
         SoundController.Instance.PlaySoundFx(AudioClipName.Touch);
         itemPopup.SetActive(false);
     }

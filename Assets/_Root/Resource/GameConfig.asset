@@ -34,3 +34,8 @@ MonoBehaviour:
   - {fileID: 4330042868223183905, guid: bfdff77c136feb146a51498e195baebb, type: 3}
   - {fileID: 5619932295332085322, guid: 07bd7880d78087f4fbd65be8a39ac5a1, type: 3}
   - {fileID: 1149227581429362398, guid: a52ab274e8567944c9163d0459424803, type: 3}
+  StoreItemList:
+  - {fileID: 129784665798491791, guid: 0d1ab02c61780bc4793ddd261a18a82b, type: 3}
+  - {fileID: 129784665798491791, guid: ad0962cb17342814694d93ff6d80f8f5, type: 3}
+  - {fileID: 129784665798491791, guid: ec99f2ac3a77e304aa730cb96a4cf7d5, type: 3}
+  - {fileID: 129784665798491791, guid: ac97e2550c7b2684a979114787edfe6e, type: 3}

@@ -36,28 +36,6 @@ public class Stage1 : StageOneLevel
         IntroStage();
     }
 
-    protected override void OnPass()
-    {
-        base.OnPass();
-
-    }
-
-    protected override void OnFail()
-    {
-        base.OnFail();
-
-    }
-
-    protected override void BeforeOnPass()
-    {
-        base.BeforeOnPass();
-    }
-
-    protected override void BeforeOnFail()
-    {
-        base.BeforeOnFail();
-    }
-
     private void IntroStage()
     {
         // start intro Game
@@ -108,6 +86,7 @@ public class Stage1 : StageOneLevel
                                     boyAnim.AnimationState.SetAnimation(0, "0/afraid", true);
                                     DOTween.Sequence().AppendInterval(2f).AppendCallback(() =>
                                     {
+                                        SoundController.Instance.StopSoundFx();
                                         boyAnim.AnimationState.SetAnimation(0, "0/run", true);
                                         SoundController.Instance.PlaySoundFx(AudioClipName.Breathing);
                                         boyAnim.gameObject.transform.DOMoveX(boyStop.transform.position.x, 10f).SetEase(Ease.Linear).OnComplete(() =>
